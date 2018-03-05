@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.dropwizard.extension</groupId>
-    <artifactId>dropwizard-weld</artifactId>
+    <artifactId>containment</artifactId>
     <version>0.8.0.1-SNAPSHOT</version>
 
 
@@ -138,7 +138,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.14</version>
+            <version>1.16.20</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
         <dependency>
