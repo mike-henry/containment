@@ -1,7 +1,8 @@
 package de.holisticon.dropwizard.weld;
 
-import com.google.common.collect.Sets;
-import org.slf4j.Logger;
+import static org.slf4j.LoggerFactory.getLogger;
+
+import java.util.Set;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
@@ -9,9 +10,9 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
-import static org.slf4j.LoggerFactory.getLogger;
+import org.slf4j.Logger;
 
-import java.util.Set;
+import com.google.common.collect.Sets;
 
 class DropwizardCdiExtension implements Extension {
 

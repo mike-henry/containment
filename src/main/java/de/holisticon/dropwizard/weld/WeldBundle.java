@@ -1,10 +1,11 @@
 package de.holisticon.dropwizard.weld;
 
+import org.jboss.weld.environment.servlet.BeanManagerResourceBindingListener;
+import org.jboss.weld.environment.servlet.Listener;
+
 import io.dropwizard.Bundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.jboss.weld.environment.servlet.BeanManagerResourceBindingListener;
-import org.jboss.weld.environment.servlet.Listener;
 
 /**
  * Dropwizard bundle that starts and initializes a weld CDIContainer.
