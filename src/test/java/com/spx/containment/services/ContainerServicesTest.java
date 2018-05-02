@@ -1,3 +1,4 @@
+
 package com.spx.containment.services;
 
 import static org.junit.Assert.assertTrue;
@@ -31,14 +32,6 @@ public class ContainerServicesTest {
 
     private ContainerServices subject;
     private ContainerRepository repository;
-    
-    
-    final Answer<Container> containerSaveAnswer = new Answer<Container>() {
-        public Container answer(InvocationOnMock invocation) throws Throwable {
-            Container container = (Container) invocation.getArguments()[0];
-            return container;
-        }
-    };
 
     @Before
     public void init() {
@@ -122,9 +115,6 @@ public class ContainerServicesTest {
         container.setName("name");
         Container parent = new Container();
         parent.setName("parent");
-    
-        
-		when(repository.save(any(Global.class))).thenAnswer(containerSaveAnswer);
         when(repository.findByName(Global.NAME)).thenReturn(Optional.ofNullable(null));
         container.setParent(parent);
         subject.saveTree(parent);

@@ -16,3 +16,4 @@ public class Global extends Container
 		this.setParent(this);
 	}
 }
+

@@ -37,7 +37,7 @@ public class ContainerServices
     private Global buildGlobal() {
         Global result = new Global();
         result.setName(Global.NAME);
-       
+        result.setParent(result);
         result=(Global) repository.save(result);
         
         return result;
