@@ -42,7 +42,7 @@ public class Container extends Referenceable
 	}
 
 	public void setParent(Container newParent){
-		newParent.addChild(this);
+		  newParent.addChild(this);
 	}
 
 	public void addChild(Container child)

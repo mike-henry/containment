@@ -32,12 +32,26 @@ public class ContainerServicesTest {
 
     private ContainerServices subject;
     private ContainerRepository repository;
+    
+    
+    private Answer<Container> containerSaveAnswer;
+    
+    
+    
 
     @Before
     public void init() {
         subject = new ContainerServices();
         repository = mock(ContainerRepository.class);
         subject = new ContainerServices(repository);
+       
+        containerSaveAnswer = new Answer<Container>() {
+   		  @Override
+			public Container answer(InvocationOnMock invocation) throws Throwable {
+				return (Container) invocation.getArguments()[0];
+		}};
+      
+        
     }
 
     @Test
@@ -116,6 +130,7 @@ public class ContainerServicesTest {
         Container parent = new Container();
         parent.setName("parent");
         when(repository.findByName(Global.NAME)).thenReturn(Optional.ofNullable(null));
+        when(repository.save(any(Container.class))).then(containerSaveAnswer);
         container.setParent(parent);
         subject.saveTree(parent);
     }

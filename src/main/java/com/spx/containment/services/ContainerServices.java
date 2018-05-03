@@ -73,7 +73,8 @@ public class ContainerServices
 	}
 
     public Container saveTree(Container container) {
-        container.setParent(container.getParent().orElseGet(() -> getGlobal()));
+        Container newParent = container.getParent().orElseGet(() -> getGlobal());
+		container.setParent(newParent);
         return doSaveTree(container);
     }
 
