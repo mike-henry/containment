@@ -7,10 +7,8 @@ import java.util.stream.Stream;
 
 import com.spx.containment.chain.SupplyChainService;
 import com.spx.containment.chain.model.SupplyChainLink;
-import com.spx.containment.model.Container;
 import com.spx.inventory.model.Inventory;
 import com.spx.inventory.services.InventoryLedger;
-import com.spx.product.model.Product;
 
 public class DemandAllocationService {
     
@@ -34,9 +32,7 @@ public class DemandAllocationService {
        );
    }
    
-   
-   
-   
+
    public void allocateInventoryTo(final Request request,BOMItem item) {
        SupplyChainLink chain = supplyChainService.getSupplyChainFor(request.getDestination(),item.getProduct()).orElseThrow( () ->new RuntimeException("No supply chain found"));
        Stream<Inventory> inventoryOfProduct = ledger.getContainerContentsOfProduct(chain.getFrom(), item.getProduct()) ;
@@ -53,41 +49,12 @@ public class DemandAllocationService {
        });
    }
 
-   
-   @Deprecated
-   public void allocateInventoryFor(Container to, int requiredQuantity, Product product, String name) {
-          
-        SupplyChainLink chain = supplyChainService.getSupplyChainFor(to,product).orElseThrow( () ->new RuntimeException("No supply chain found"));
-        Stream<Inventory> inventoryOfProduct = ledger.getContainerContentsOfProduct(chain.getFrom(), product) ;
-       
-        AtomicInteger alloctedSoFar = new AtomicInteger(0);
-        inventoryOfProduct
-        .forEach(i -> {
-            if (alloctedSoFar.get() < requiredQuantity) {
-                int free = getFreeQuantity(i);
-                int allocationQuanity = Math.min(requiredQuantity - alloctedSoFar.get(), free);
-                
-                Allocation allocation = new Allocation( to, allocationQuanity, i,null);
-                
-                this.allocations.add(allocation);
-                alloctedSoFar.addAndGet(allocationQuanity);
-            }
-        });
-    }
-
     private int getFreeQuantity(Inventory inventory) {
         int totalAllocated=this.allocations.stream()
            .filter(a -> a.getInventory().equals(inventory))
            .mapToInt(a -> a.getQuantity())
            .sum();
         return inventory.getQuantity() - totalAllocated;
-    }
-    
-    
-    @Deprecated
-    public Stream <Allocation> getAllocations(String name){
-        return this.allocations.stream()
-        .filter(a -> a.getTo().getName().equals(name));
     }
     
     public Stream <Allocation> getAllocations(Request request){

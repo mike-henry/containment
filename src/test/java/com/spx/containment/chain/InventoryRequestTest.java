@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.spx.containment.model.Container;
@@ -48,12 +47,8 @@ public class InventoryRequestTest {
     
     @Test
     public void createADemand() {
-       
         List<Inventory> mockInventory = new ArrayList<Inventory>();
-        
-       when(repository.findByContainer(any(Container.class))).thenReturn(mockInventory);
-          
-        
+        when(repository.findByContainer(any(Container.class))).thenReturn(mockInventory);
         int wantedQuantity = 10;
         Product wantedProduct1 = new Product();
         wantedProduct1.setDescription("widget-alpha");
@@ -64,16 +59,17 @@ public class InventoryRequestTest {
         wantedProduct2.setDescription("widget-beta");
         wantedProduct2.setReference("widget-b");
         Inventory inventory = new Inventory(null, 99, wantedProduct1,"dummy");
-       
-      
         ledger.addToContainer(from, inventory);
-
         supplyChainService.addSupplyLink(wantedProduct1, from, to);
         supplyChainService.addSupplyLink(wantedProduct2, from, to);
-        subject.allocateInventoryFor(to, wantedQuantity, wantedProduct1, "d1");
+        Request request = new Request.Builder("d1")
+       		 .destination(to)
+       		 .build();
+        BOMItem requiredItem =  new BOMItem(wantedProduct1,wantedQuantity);
+       
+        subject.allocateInventoryTo(request, requiredItem);
 
-        Stream<Allocation> allocations = subject.getAllocations("d1");
-
+        Stream<Allocation> allocations = subject.getAllocations(request);
         allocations.forEach(a -> {
             assertEquals(a.getQuantity(), wantedQuantity);
         });
