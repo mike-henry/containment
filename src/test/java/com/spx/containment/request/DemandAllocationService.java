@@ -54,6 +54,7 @@ public class DemandAllocationService {
    }
 
    
+   @Deprecated
    public void allocateInventoryFor(Container to, int requiredQuantity, Product product, String name) {
           
         SupplyChainLink chain = supplyChainService.getSupplyChainFor(to,product).orElseThrow( () ->new RuntimeException("No supply chain found"));
@@ -82,9 +83,16 @@ public class DemandAllocationService {
         return inventory.getQuantity() - totalAllocated;
     }
     
+    
+    @Deprecated
     public Stream <Allocation> getAllocations(String name){
         return this.allocations.stream()
         .filter(a -> a.getTo().getName().equals(name));
+    }
+    
+    public Stream <Allocation> getAllocations(Request request){
+    	return request.getAllocations().stream();
+    			
     }
 
 }

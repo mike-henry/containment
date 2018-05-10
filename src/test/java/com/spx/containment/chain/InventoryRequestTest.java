@@ -19,6 +19,7 @@ import com.spx.containment.model.Container;
 import com.spx.containment.request.Allocation;
 import com.spx.containment.request.BOMItem;
 import com.spx.containment.request.DemandAllocationService;
+import com.spx.containment.request.Request;
 import com.spx.containment.services.ContainerServices;
 import com.spx.inventory.model.Inventory;
 import com.spx.inventory.repository.InventoryRepository;
@@ -83,10 +84,6 @@ public class InventoryRequestTest {
     public void createADemandOfChild() {
         
         String  demandName = "d1";
-        
-            
-        
-        
 
         final int wantedQuantity = 10;
         Product wantedProduct1 = new Product();
@@ -96,10 +93,10 @@ public class InventoryRequestTest {
         wantedProduct2.setDescription("widget-beta");
         wantedProduct2.setReference("widget-b");
         
-        List<BOMItem> requiredItems = new ArrayList<BOMItem>();
-        BOMItem item1 =  new BOMItem(wantedProduct1,wantedQuantity);
+  
+        BOMItem requiredItem =  new BOMItem(wantedProduct1,wantedQuantity);
         
-   //     Request request = new   Request( demandName,List<BOMItem> requiredItems,Container destination){
+
         List<Inventory> inventoryFound = new ArrayList<Inventory>();
         when(repository.findByContainer(from)).thenReturn(inventoryFound);
         Container fromChild = new Container();
@@ -108,9 +105,14 @@ public class InventoryRequestTest {
         inventoryFound.add(inventory);
         supplyChainService.addSupplyLink(wantedProduct1, from, to);
         supplyChainService.addSupplyLink(wantedProduct2, from, to);
-        subject.allocateInventoryFor(to, wantedQuantity, wantedProduct1, demandName);
-        Stream<Allocation> allocations = subject.getAllocations(demandName);
-        long count = subject.getAllocations(demandName).count();
+        Request request = new Request.Builder(demandName)
+     		 .destination(to)
+     		 .build();
+        
+        subject.allocateInventoryTo(request, requiredItem);
+        Stream<Allocation> allocations = subject.getAllocations(request);
+        long count = subject.getAllocations(request).count();
+
         assertEquals(1,count);
         allocations.forEach(a -> {
            assertEquals(a.getQuantity(), wantedQuantity);
@@ -139,10 +141,16 @@ public class InventoryRequestTest {
         inventoryFound.add(inventory2);
         supplyChainService.addSupplyLink(wantedProduct1, from, to);
         supplyChainService.addSupplyLink(wantedProduct2, from, to);
-        subject.allocateInventoryFor(to, wantedQuantity, wantedProduct1, demandName);
-        Stream<Allocation> allocations = subject.getAllocations(demandName);
-        long count = subject.getAllocations(demandName).count();
-        assertEquals(2,count);
+        Request request = new Request.Builder(demandName)
+        	.destination(to)
+        	.build();
+        BOMItem requiredItem =  new BOMItem(wantedProduct1,wantedQuantity);
+            
+		subject.allocateInventoryTo(request, requiredItem);
+		Stream<Allocation> allocations = subject.getAllocations(request);
+		long count = subject.getAllocations(request).count();
+
+		assertEquals(2,count);
         allocations.forEach(a -> {
            assertEquals(5,a.getQuantity() );
            assertEquals(fromChild, a.getInventory().getContainer());
@@ -175,11 +183,16 @@ public class InventoryRequestTest {
         inventoryFound.add(inventory3);
         supplyChainService.addSupplyLink(wantedProduct1, from, to);
         supplyChainService.addSupplyLink(wantedProduct2, from, to);
-        subject.allocateInventoryFor(to, wantedQuantity, wantedProduct1, demandName);
-        Stream<Allocation> allocations = subject.getAllocations(demandName);
-        long itemsWithAllocations = subject.getAllocations(demandName).count();
+
+        Request request = new Request.Builder(demandName)
+        		 .destination(to)
+        		 .build();
+        BOMItem requiredItem =  new BOMItem(wantedProduct1,wantedQuantity);
+        subject.allocateInventoryTo(request, requiredItem);
+       
+        long itemsWithAllocations = subject.getAllocations(request).count();
         assertEquals(2,itemsWithAllocations);  /// quantity of 5 each
-        int totalAllocated = subject.getAllocations(demandName)
+        int totalAllocated = subject.getAllocations(request)
         .mapToInt(a -> a.getQuantity())
         .sum();
         
@@ -187,9 +200,9 @@ public class InventoryRequestTest {
         
         
         
-        allocations.forEach(a -> {
-           assertEquals(5,a.getQuantity() );
-          // assertEquals(fromChild, a.getInventory().getContainer());
+        subject.getAllocations(request).forEach(a -> {
+           assertEquals(inventoryQuantity,a.getQuantity() );
+        
            System.out.println(a.getInventory().getReference()  +":"+a.getQuantity());
         });
     }
@@ -217,11 +230,16 @@ public class InventoryRequestTest {
         inventoryFound.add(inventory3);
         supplyChainService.addSupplyLink(wantedProduct1, from, to);
         supplyChainService.addSupplyLink(wantedProduct2, from, to);
-        subject.allocateInventoryFor(to, wantedQuantity, wantedProduct1, demandName);
-        Stream<Allocation> allocations = subject.getAllocations(demandName);
-        long count = subject.getAllocations(demandName).count();
+        Request request = new Request.Builder(demandName)
+        		 .destination(to)
+        		 .build();
+        BOMItem requiredItem =  new BOMItem(wantedProduct1,wantedQuantity);
+        
+        subject.allocateInventoryTo(request, requiredItem);
+        Stream<Allocation> allocations = subject.getAllocations(request);
+        long count = subject.getAllocations(request).count();
         assertEquals(3,count);
-        int totalAllocated = subject.getAllocations(demandName)
+        int totalAllocated = subject.getAllocations(request)
         .mapToInt(a -> a.getQuantity())
         .sum();
         
@@ -254,11 +272,20 @@ public class InventoryRequestTest {
         inventoryFound.add(inventory2);
         supplyChainService.addSupplyLink(wantedProduct1, from, to);
         supplyChainService.addSupplyLink(wantedProduct2, from, to);
-        subject.allocateInventoryFor(to, wantedQuantity, wantedProduct1, demandName);
-        Stream<Allocation> allocations = subject.getAllocations(demandName);
-        long count = subject.getAllocations(demandName).count();
+        
+        Request request = new Request.Builder(demandName)
+     		 .destination(to)
+     		 .build();
+
+        BOMItem requiredItem =  new BOMItem(wantedProduct1,wantedQuantity);
+        
+
+        subject.allocateInventoryTo(request, requiredItem);
+
+        Stream<Allocation> allocations = subject.getAllocations(request);
+        long count = subject.getAllocations(request).count();
         assertEquals(2,count);
-        int totalAllocated = subject.getAllocations(demandName)
+        int totalAllocated = subject.getAllocations(request)
         .mapToInt(a -> a.getQuantity())
         .sum();
         
