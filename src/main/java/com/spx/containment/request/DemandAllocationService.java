@@ -23,31 +23,37 @@ public class DemandAllocationService {
          this.ledger =ledger;        
          this.supplyChainService=supplyChainService;
     }
-    
-    
-    
+   
    public void allocateTo(final Request request){
        request.getRequiredItems().stream()
        .forEach(item ->  allocateInventoryTo(request, item)
        );
    }
-   
 
    public void allocateInventoryTo(final Request request,BOMItem item) {
        SupplyChainLink chain = supplyChainService.getSupplyChainFor(request.getDestination(),item.getProduct()).orElseThrow( () ->new RuntimeException("No supply chain found"));
        Stream<Inventory> inventoryOfProduct = ledger.getContainerContentsOfProduct(chain.getFrom(), item.getProduct()) ;
        AtomicInteger alloctedSoFar = new AtomicInteger(0);
        inventoryOfProduct
-       .forEach(i -> {
+       .forEach(inventory -> {
            if (alloctedSoFar.get() < item.getQuantity()) {
-               int free = getFreeQuantity(i);
+               int free = getFreeQuantity(inventory);
                int allocationQuanity = Math.min(item.getQuantity() - alloctedSoFar.get(), free);
-               Allocation allocation = new Allocation( request.getDestination(), allocationQuanity, i,request);
-               request.getAllocations().add(allocation);
+               createAllocation(request, inventory, allocationQuanity);
                alloctedSoFar.addAndGet(allocationQuanity);
            }
        });
    }
+
+private void createAllocation(final Request request, Inventory inventory, int quanity) {
+	Allocation.Builder builder = new Allocation.Builder();
+	Allocation allocation = builder
+	.inventory(inventory)
+	.request(request)
+	.quantity(quanity)
+	.build();
+    request.getAllocations().add(allocation);
+}
 
     private int getFreeQuantity(Inventory inventory) {
         int totalAllocated=this.allocations.stream()
