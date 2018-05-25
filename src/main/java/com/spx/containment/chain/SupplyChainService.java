@@ -4,17 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.spx.containment.chain.model.SupplyChainLink;
 import com.spx.containment.model.Container;
 import com.spx.inventory.services.InventoryLedger;
 import com.spx.product.model.Product;
 
+
+@Named
 public class SupplyChainService {
 
     private List<SupplyChainLink> supplyChains = new ArrayList<SupplyChainLink>();
 
     private final InventoryLedger ledger;
 
+    @Inject
     public SupplyChainService(InventoryLedger ledger) {
         this.ledger = ledger;
     }

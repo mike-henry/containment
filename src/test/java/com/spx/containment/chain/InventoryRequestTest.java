@@ -14,11 +14,10 @@ import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.spx.containment.chain.model.Allocation;
+import com.spx.containment.chain.model.BOMItem;
+import com.spx.containment.chain.model.Request;
 import com.spx.containment.model.Container;
-import com.spx.containment.request.Allocation;
-import com.spx.containment.request.BOMItem;
-import com.spx.containment.request.DemandAllocationService;
-import com.spx.containment.request.Request;
 import com.spx.containment.services.ContainerServices;
 import com.spx.inventory.model.Inventory;
 import com.spx.inventory.repository.InventoryRepository;
@@ -32,7 +31,7 @@ public class InventoryRequestTest {
     private InventoryRepository repository;
     InventoryLedger ledger = new InventoryLedger();
     SupplyChainService supplyChainService;
-    DemandAllocationService subject;
+    InventoryRequestAllocationService subject;
 
     
     @Before
@@ -42,7 +41,7 @@ public class InventoryRequestTest {
         to.setName("to");
         ledger = new InventoryLedger(repository,new ContainerServices());
         supplyChainService = new SupplyChainService(ledger);
-        subject = new DemandAllocationService(ledger, supplyChainService);
+        subject = new InventoryRequestAllocationService(ledger, supplyChainService);
     }
     
     @Test

@@ -1,4 +1,4 @@
-package com.spx.containment.request;
+package com.spx.containment.chain.model;
 
 import com.spx.product.model.Product;
 

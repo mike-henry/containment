@@ -1,4 +1,4 @@
-package com.spx.containment.request;
+package com.spx.containment.chain.model;
 
 import java.util.UUID;
 
@@ -57,6 +57,7 @@ public class Allocation {
         
         public Allocation build() {
           Allocation result = new Allocation(request.getDestination(),  quantity,  inventory,  request);
+        
           return result;
         }
         

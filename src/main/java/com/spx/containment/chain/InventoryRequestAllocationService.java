@@ -1,16 +1,23 @@
-package com.spx.containment.request;
+package com.spx.containment.chain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-import com.spx.containment.chain.SupplyChainService;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
+import com.spx.containment.chain.model.Allocation;
+import com.spx.containment.chain.model.BOMItem;
+import com.spx.containment.chain.model.Request;
 import com.spx.containment.chain.model.SupplyChainLink;
 import com.spx.inventory.model.Inventory;
 import com.spx.inventory.services.InventoryLedger;
 
-public class DemandAllocationService {
+
+@RequestScoped
+public class InventoryRequestAllocationService {
     
   
     /// this is not real...yet
@@ -19,7 +26,8 @@ public class DemandAllocationService {
     private final InventoryLedger ledger;
     private final SupplyChainService supplyChainService;
     
-    public DemandAllocationService(InventoryLedger ledger,SupplyChainService supplyChainService){
+    @Inject
+    public InventoryRequestAllocationService(InventoryLedger ledger,SupplyChainService supplyChainService){
          this.ledger =ledger;        
          this.supplyChainService=supplyChainService;
     }
@@ -30,6 +38,8 @@ public class DemandAllocationService {
        );
    }
 
+   
+   @Deprecated
    public void allocateInventoryTo(final Request request,BOMItem item) {
        SupplyChainLink chain = supplyChainService.getSupplyChainFor(request.getDestination(),item.getProduct()).orElseThrow( () ->new RuntimeException("No supply chain found"));
        Stream<Inventory> inventoryOfProduct = ledger.getContainerContentsOfProduct(chain.getFrom(), item.getProduct()) ;
