@@ -45,7 +45,7 @@ public class ViewConversionTest {
         to.setName("to");
         ledger = new InventoryLedger(repository,new ContainerServices());
         supplyChainService = new SupplyChainService(ledger);
-        subject = new InventoryRequestAllocationService(ledger, supplyChainService);
+        subject = new InventoryRequestAllocationService(ledger, supplyChainService,null);
     }
 	
 	@Test 
@@ -62,17 +62,12 @@ public class ViewConversionTest {
         .forEach(a->checkRequiredItems(a,view.getRequiredItems()));
         
 	}
-	
-	
-	
-	
-	
 
 	private void checkRequiredItems(BOMItem a, List<BOMItemView> requiredItems) {
 		BOMItemView bomtemView=getViewByProductReference(requiredItems,a.getProduct().getReference())
 				.orElse(null);
 		 assertEquals(bomtemView.getProductReference(),a.getProduct().getReference());
-		
+		 assertEquals(bomtemView.getQuantity(),a.getQuantity());
 	}
 
 	private Optional<BOMItemView> getViewByProductReference(List<BOMItemView> views, String reference) {
@@ -83,21 +78,18 @@ public class ViewConversionTest {
 	}
 
 	private void checkAllocation(Allocation allocation,List<AllocationView> allocationViews) {
-	
 		AllocationView allocationView=getViewByInventoryReference(allocationViews,allocation.getInventory().getReference())
 		.orElse(null);
 		 assertEquals(allocationView.getInventoryReference(),allocation.getInventory().getReference());
 		 assertEquals(allocationView.getQuantity(),allocation.getQuantity());
 		 assertEquals(allocationView.getRequestReference(),allocation.getRequest().getReference());
-		 
-		
 	}
 	
 	private Optional<AllocationView> getViewByInventoryReference(List<AllocationView> views, String reference) {
 		return views.
-		stream()
-		.filter(view -> view.getInventoryReference().equals(reference))
-		.findFirst();
+		  stream()
+		  .filter(view -> view.getInventoryReference().equals(reference))
+		  .findFirst();
 	}
 	
 
@@ -108,8 +100,6 @@ public class ViewConversionTest {
         Product wantedProduct1 = new Product();
         wantedProduct1.setDescription("widget-alpha");
         wantedProduct1.setReference("widget-a");
-        
-     
         Product wantedProduct2 = new Product();
         wantedProduct2.setDescription("widget-beta");
         wantedProduct2.setReference("widget-b");
@@ -119,11 +109,9 @@ public class ViewConversionTest {
         supplyChainService.addSupplyLink(wantedProduct2, from, to);
         Request request = new Request.Builder("d1")
        		 .destination(to)
+       		 .requiredItem(wantedProduct1,wantedQuantity)
        		 .build();
-        BOMItem requiredItem =  new BOMItem(wantedProduct1,wantedQuantity);
-       
-        subject.allocateInventoryTo(request, requiredItem);
-     
+        subject.allocateTo(request);
 		return request;
 	}
 }

@@ -1,362 +1,379 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.dropwizard.extension</groupId>
-    <artifactId>containment</artifactId>
-    <version>0.8.0.1-SNAPSHOT</version>
-
-
-    <properties>
-        <dropwizard.version>1.1.1</dropwizard.version>
-        <weld.version>2.2.8.Final</weld.version>
-        <cdi-api.version>1.2</cdi-api.version>
-        <jersey.version>2.23.2</jersey.version>
-        <jetty.version>9.2.4.v20141103</jetty.version>
-        <deltaspike.version>1.8.0</deltaspike.version>
-        <ogm.version>5.1.0.Final</ogm.version>
-    </properties>
+	<groupId>io.dropwizard.extension</groupId>
+	<artifactId>containment</artifactId>
+	<version>0.8.0.1-SNAPSHOT</version>
 
 
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.apache.deltaspike.distribution</groupId>
-                <artifactId>distributions-bom</artifactId>
-                <version>${deltaspike.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.hibernate.ogm</groupId>
-                <artifactId>hibernate-ogm-bom</artifactId>
-                <version>${ogm.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.hibernate.ogm/hibernate-ogm-neo4j -->
-            <dependency>
-                <groupId>org.hibernate.ogm</groupId>
-                <artifactId>hibernate-ogm-neo4j</artifactId>
-                <version>${ogm.version}</version>
-            </dependency>
-
-
-        </dependencies>
-    </dependencyManagement>
+	<properties>
+		<dropwizard.version>1.1.1</dropwizard.version>
+		<weld.version>2.2.8.Final</weld.version>
+		<cdi-api.version>1.2</cdi-api.version>
+		<jersey.version>2.23.2</jersey.version>
+		<jetty.version>9.2.4.v20141103</jetty.version>
+		<deltaspike.version>1.8.0</deltaspike.version>
+		<ogm.version>5.1.0.Final</ogm.version>
+	</properties>
 
 
 
-    <dependencies>
-        <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-core</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-migrations -->
-        <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-migrations</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-validation -->
-        <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-validation</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.deltaspike.distribution</groupId>
+				<artifactId>distributions-bom</artifactId>
+				<version>${deltaspike.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.3.5.Final</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!--dependency> <groupId>javax.servlet</groupId> <artifactId>javax.servlet-api</artifactId> 
-            <version>3.1.0</version> </dependency -->
-
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-cdi</artifactId>
-            <version>${jetty.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.2</version>
-        </dependency>
-        
-        
-        
-        
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers.glassfish/jersey-gf-cdi -->
+			<dependency>
+				<groupId>org.hibernate.ogm</groupId>
+				<artifactId>hibernate-ogm-bom</artifactId>
+				<version>${ogm.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.hibernate.ogm/hibernate-ogm-neo4j -->
+			<dependency>
+				<groupId>org.hibernate.ogm</groupId>
+				<artifactId>hibernate-ogm-neo4j</artifactId>
+				<version>${ogm.version}</version>
+			</dependency>
 
 
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>${cdi-api.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.weld.se</groupId>
-            <artifactId>weld-se-core</artifactId>
-            <version>${weld.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet-core</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet</artifactId>
-            <version>${weld.version}</version>
-        </dependency>
+		</dependencies>
+	</dependencyManagement>
 
 
-        <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>javax.transaction-api</artifactId>
-            <version>1.2</version>
-        </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.20</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
-        <dependency>
-            <groupId>com.smoketurner</groupId>
-            <artifactId>dropwizard-swagger</artifactId>
-            <version>1.0.6-1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-core</artifactId>
+			<version>${dropwizard.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-migrations -->
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-migrations</artifactId>
+			<version>${dropwizard.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-validation -->
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-validation</artifactId>
+			<version>${dropwizard.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.3.5.Final</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!--dependency> <groupId>javax.servlet</groupId> <artifactId>javax.servlet-api</artifactId> 
+			<version>3.1.0</version> </dependency -->
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-cdi</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+		</dependency>
 
 
 
 
-        <!-- https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-impl -->
-        <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-data-module-impl</artifactId>
-
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-api -->
-        <dependency>
-            <groupId>org.apache.deltaspike.modules</groupId>
-            <artifactId>deltaspike-data-module-api</artifactId>
-
-        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers.glassfish/jersey-gf-cdi -->
 
 
-        <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-api</artifactId>
-            <!-- scope>compile</scope -->
-        </dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>${cdi-api.version}</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-impl</artifactId>
-            <!-- scope>runtime</scope -->
-        </dependency>
+		<dependency>
+			<groupId>org.jboss.weld.se</groupId>
+			<artifactId>weld-se-core</artifactId>
+			<version>${weld.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>${weld.version}</version>
+		</dependency>
 
 
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>javax.transaction-api</artifactId>
+			<version>1.2</version>
+		</dependency>
 
-        <!-- http://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.2.5</version>
-        </dependency>
-        <!-- http://mvnrepository.com/artifact/org.apache.shiro/shiro-web -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>1.2.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.jersey.ext.cdi</groupId>
-            <artifactId>jersey-weld2-se</artifactId>
-            <version>2.23.2</version>
-        </dependency>
-        
-        
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson2-provider</artifactId>
-        </dependency>
-        
-          
-  
-        
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.jbossts</groupId>
-            <artifactId>jbossjta</artifactId>
-            <version>4.16.4.Final</version>
-        </dependency>
-        <!-- TEST -->
-        <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-testing</artifactId>
-            <version>${dropwizard.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-db -->
-        <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-db</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-hibernate -->
-        <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-hibernate</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
-            <artifactId>jersey-test-framework-provider-inmemory</artifactId>
-            <version>${jersey.version}</version>
-            <scope>test</scope>
-        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-maven -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.20</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
+		<dependency>
+			<groupId>com.smoketurner</groupId>
+			<artifactId>dropwizard-swagger</artifactId>
+			<version>1.0.6-1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 
 
 
-        <dependency>
-            <groupId>org.needle4j</groupId>
-            <artifactId>needle4j</artifactId>
-            <version>2.3</version>
-            <scope>test</scope>
-        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-impl -->
+		<dependency>
+			<groupId>org.apache.deltaspike.modules</groupId>
+			<artifactId>deltaspike-data-module-impl</artifactId>
 
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jadira.usertype/usertype.spi -->
-        <dependency>
-            <groupId>org.jadira.usertype</groupId>
-            <artifactId>usertype.spi</artifactId>
-            <version>5.0.0.GA</version>
-        </dependency>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.deltaspike.modules/deltaspike-data-module-api -->
+		<dependency>
+			<groupId>org.apache.deltaspike.modules</groupId>
+			<artifactId>deltaspike-data-module-api</artifactId>
 
-        <dependency>
-            <groupId>org.hibernate.ogm</groupId>
-            <artifactId>hibernate-ogm-neo4j</artifactId>
-
-        </dependency>
+		</dependency>
 
 
+		<dependency>
+			<groupId>org.apache.deltaspike.core</groupId>
+			<artifactId>deltaspike-core-api</artifactId>
+			<!-- scope>compile</scope -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.deltaspike.core</groupId>
+			<artifactId>deltaspike-core-impl</artifactId>
+			<!-- scope>runtime</scope -->
+		</dependency>
 
 
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
+		<!-- http://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.shiro/shiro-web -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.2.5</version>
+		</dependency>
 
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.0.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.ext.cdi</groupId>
+			<artifactId>jersey-weld2-se</artifactId>
+			<version>2.23.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+		</dependency>
+
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.jbossts</groupId>
+			<artifactId>jbossjta</artifactId>
+			<version>4.16.4.Final</version>
+		</dependency>
+		<!-- TEST -->
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-testing</artifactId>
+			<version>${dropwizard.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-db -->
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-db</artifactId>
+			<version>${dropwizard.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-hibernate -->
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-hibernate</artifactId>
+			<version>${dropwizard.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
+			<artifactId>jersey-test-framework-provider-inmemory</artifactId>
+			<version>${jersey.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
+
+		<dependency>
+			<groupId>org.needle4j</groupId>
+			<artifactId>needle4j</artifactId>
+			<version>2.3</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>1.0.2</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>1.0.2</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.jadira.usertype/usertype.spi -->
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.spi</artifactId>
+			<version>5.0.0.GA</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.ogm</groupId>
+			<artifactId>hibernate-ogm-neo4j</artifactId>
+
+		</dependency>
 
 
 
 
 
-    </dependencies>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9.1</version>
-                <executions>
-                    <execution>
-                        <id>add-test-java</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>add-test-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/example/java</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>add-test-resources</id>
-                        <phase>generate-test-resources</phase>
-                        <goals>
-                            <goal>add-test-resource</goal>
-                        </goals>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>src/example/resources</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.0.0</version>
+		</dependency>
+
+
+
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<executions>
+					<execution>
+						<id>add-test-java</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/example/java</source>
+							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-test-resources</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/example/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

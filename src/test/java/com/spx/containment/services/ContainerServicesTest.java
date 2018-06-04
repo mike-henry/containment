@@ -1,21 +1,16 @@
 
 package com.spx.containment.services;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
 
-import java.lang.reflect.Array;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
-import org.assertj.core.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;

@@ -2,18 +2,19 @@ package com.spx.containment.chain.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.spx.containment.model.Container;
+import com.spx.containment.model.Referenceable;
+import com.spx.product.model.Product;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 
 @Getter
-@EqualsAndHashCode
-public class Request {
+public class Request extends Referenceable { 
     
-    private final String reference;
+ 
     private final Container destination;
 
     private final List<Allocation> allocations = new ArrayList<Allocation>();
@@ -48,6 +49,10 @@ public class Request {
       	 public Builder requiredItem(BOMItem requiredItem) {
     		 this.requiredItems.add(requiredItem);
     		 return this;
+    	 }
+      	 
+    	 public Builder requiredItem(Product product,int quatity) {
+    		 return requiredItem(new BOMItem(UUID.randomUUID(),product, quatity));
     	 }
       	 
       	 public Request build() {
