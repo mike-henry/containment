@@ -1,5 +1,6 @@
 package com.spx.inventory.model;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -22,6 +23,7 @@ public class Inventory extends Referenceable {
     @ManyToOne
     private Container container;
 
+    @Basic
     private int quantity = 1; // BigDecimal keep it simple though
     
     @ManyToOne

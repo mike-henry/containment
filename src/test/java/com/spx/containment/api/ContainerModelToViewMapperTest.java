@@ -100,7 +100,7 @@ public class ContainerModelToViewMapperTest {
         when(cam.fetchContainerByName("root")).thenReturn(Optional.of(root));
         
         ContainerView[] result = subject.getViewArray("root");
-        System.out.println("Wait");
+       
     }
 
     private Container createTestContainer(String name) {

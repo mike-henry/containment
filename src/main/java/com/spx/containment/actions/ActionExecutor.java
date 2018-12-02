@@ -23,6 +23,10 @@ public class ActionExecutor {
             return result;
         } catch (Throwable error) {
             log.error("Error Occured executing:"+className, error);
+            if (error instanceof RuntimeException) {
+            	throw (RuntimeException)error;
+            }
+            
             throw new RuntimeException(error);
         }
         

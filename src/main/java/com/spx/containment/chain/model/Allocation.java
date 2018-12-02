@@ -4,29 +4,37 @@ import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import com.spx.containment.model.Container;
 import com.spx.containment.model.Referenceable;
 import com.spx.inventory.model.Inventory;
 
 import lombok.Getter;
 
 @Getter
+
 @Entity
 public class Allocation {
 	
 	@Id
 	protected UUID id;
-    private Referenceable to;
+	
+	@ManyToOne
+    private Container to;
     private int quantity;
+    
+    @ManyToOne
     private Inventory inventory;
+    @ManyToOne
     private Request request;
 
-	Allocation(){
+	protected Allocation(){
 
 	}
 
     
-    private Allocation(Referenceable to, int quantity, Inventory inventory, Request request) {
+    private Allocation(Container to, int quantity, Inventory inventory, Request request) {
 		this.to = to;
 		this.quantity = quantity;
 		this.inventory = inventory;

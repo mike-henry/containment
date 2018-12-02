@@ -4,21 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import com.spx.containment.model.Container;
 import com.spx.containment.model.Referenceable;
 import com.spx.product.model.Product;
 
-import lombok.Getter;
+import lombok.Data;
 
 
-@Getter
+@Data
+@Entity
 public class Request extends Referenceable { 
     
  
-    private final Container destination;
+    @ManyToOne
+	private  Container destination;
 
-    private final List<Allocation> allocations = new ArrayList<Allocation>();
-    private final List<BOMItem> requiredItems = new ArrayList<BOMItem>();
+    
+    @OneToMany
+    private  List<Allocation> allocations = new ArrayList<Allocation>();
+    @OneToMany
+    private  List<BOMItem> requiredItems = new ArrayList<BOMItem>();
+    
+    
+    public Request() {
+    	
+    }
     
     Request(String reference,List<BOMItem> requiredItems,Container destination){
         this.reference=reference;

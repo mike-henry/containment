@@ -67,7 +67,7 @@ public class InventoryRequestAllocationService {
 		.quantity(quanity)
 		.build();
 	   allocation=   inventoryAllocationRepository.save(allocation);
-	   request.getAllocations().add(allocation);
+	 //  request.getAllocations().add(allocation);
    }
 
     private int getFreeQuantity(Inventory inventory) {
@@ -79,7 +79,8 @@ public class InventoryRequestAllocationService {
     }
     
     public Stream <Allocation> getAllocations(Request request){
-       return request.getAllocations().stream();
+       return null;
+    		//   request.getAllocations().stream();
     }
 
 }

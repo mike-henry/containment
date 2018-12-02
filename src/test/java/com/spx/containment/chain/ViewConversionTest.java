@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import com.spx.containment.chain.api.AllocationView;
 import com.spx.containment.chain.api.BOMItemView;
-import com.spx.containment.chain.api.ModelToViewAdaptor;
+import com.spx.containment.chain.api.ModelToApiViewAdaptor;
 import com.spx.containment.chain.api.RequestView;
 import com.spx.containment.chain.model.Allocation;
 import com.spx.containment.chain.model.BOMItem;
@@ -25,18 +25,24 @@ import com.spx.inventory.model.Inventory;
 import com.spx.inventory.repository.InventoryRepository;
 import com.spx.inventory.services.InventoryLedger;
 import com.spx.product.model.Product;
+import com.spx.product.services.ProductManager;
 
 public class ViewConversionTest {
 
 	
 	
-    Container from = new Container();
+    private static final String TEST_REQUEST_REF = "test-request";
+	private static final String TEST_DESTINATION_REF = "test-destination-container";
+	private static final String TEST_PRDDUCT_REF = "test-product";
+	Container from = new Container();
     Container to = new Container();
     private InventoryRepository repository;
     InventoryLedger ledger = new InventoryLedger();
     SupplyChainService supplyChainService;
     InventoryRequestAllocationService subject;
-
+    ModelToApiViewAdaptor adaptor;
+	private ContainerServices mockContainerAccess = mock(ContainerServices.class);
+	private ProductManager  mockProductManager = mock(ProductManager.class);
     
     @Before
     public void init(){
@@ -46,11 +52,13 @@ public class ViewConversionTest {
         ledger = new InventoryLedger(repository,new ContainerServices());
         supplyChainService = new SupplyChainService(ledger);
         subject = new InventoryRequestAllocationService(ledger, supplyChainService,null);
+        
+        adaptor = new ModelToApiViewAdaptor(mockContainerAccess, mockProductManager);
     }
 	
 	@Test 
 	public void requestToView() {
-		ModelToViewAdaptor adaptor = new ModelToViewAdaptor();
+		
         Request request = createRequest();
         RequestView view =adaptor.toRequestView(request);
         assertEquals(request.getReference(),view.getReference());
@@ -61,6 +69,24 @@ public class ViewConversionTest {
         request.getRequiredItems().stream()
         .forEach(a->checkRequiredItems(a,view.getRequiredItems()));
         
+	}
+	
+	
+	@Test 
+	public void viewToRequest() {
+		 RequestView requestView = createRequestView();
+		 adaptor.toModel(requestView);
+		 
+	}
+
+	private RequestView createRequestView() {
+		RequestView result = new RequestView(TEST_REQUEST_REF,TEST_DESTINATION_REF);
+		result.getRequiredItems().add(createBomItemView());
+		return result;
+	}
+
+	private BOMItemView createBomItemView() {
+		return new BOMItemView(TEST_PRDDUCT_REF,1);
 	}
 
 	private void checkRequiredItems(BOMItem a, List<BOMItemView> requiredItems) {
@@ -110,8 +136,12 @@ public class ViewConversionTest {
         Request request = new Request.Builder("d1")
        		 .destination(to)
        		 .requiredItem(wantedProduct1,wantedQuantity)
-       		 .build();
-        subject.allocateTo(request);
+       		 .build();  
 		return request;
 	}
+	
+	
+	
+	
+	
 }

@@ -2,6 +2,7 @@ firstname: Hello, %s!
 defaultWord: Stranger
 
 server:
+  registerDefaultExceptionMappers: false
   applicationConnectors:
   - type: http 
     port: 9191

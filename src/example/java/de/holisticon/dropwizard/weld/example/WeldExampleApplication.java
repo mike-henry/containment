@@ -52,7 +52,7 @@ public class WeldExampleApplication extends Application<Configuration> {
 
     @Override
     public void initialize(final Bootstrap<Configuration> bootstrap) {
-        bootstrap.addBundle(new WeldBundle());
+      //  bootstrap.addBundle(new WeldBundle());
     }
 
 

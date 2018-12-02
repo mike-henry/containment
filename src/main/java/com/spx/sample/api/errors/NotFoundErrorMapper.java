@@ -1,10 +1,12 @@
-package com.spx.containment.business.exceptions;
+package com.spx.sample.api.errors;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+
+import com.spx.containment.business.exceptions.NotFoundException;
 
 
 

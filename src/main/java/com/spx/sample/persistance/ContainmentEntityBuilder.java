@@ -41,7 +41,7 @@ public class ContainmentEntityBuilder extends EntityManagerBuilder {
         persistanceUnitProperties.put("hibernate.cache.use_structured_entries", "true");
         persistanceUnitProperties.put(OgmProperties.HOST,"localhost:7687");
         persistanceUnitProperties.put(OgmProperties.USERNAME,"neo4j");
-        persistanceUnitProperties.put(OgmProperties.PASSWORD,"root");
+        persistanceUnitProperties.put(OgmProperties.PASSWORD,"ignit10n");
         persistanceUnitProperties.put(OgmProperties.DATABASE, configuration.getContainment().getDatabaseName());
         EntityManagerFactory factory = Persistence
                 .createEntityManagerFactory(configuration.getContainment().getPersistanceUnit(), persistanceUnitProperties);
