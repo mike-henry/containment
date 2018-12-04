@@ -1,4 +1,4 @@
-package com.spx.sample.persistance;
+package com.spx.general.persistance;
 
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;

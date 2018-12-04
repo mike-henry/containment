@@ -1,4 +1,4 @@
-package com.spx.sample.api.errors;
+package com.spx.general.api.errors;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

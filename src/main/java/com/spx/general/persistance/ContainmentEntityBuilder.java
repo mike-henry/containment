@@ -1,4 +1,4 @@
-package com.spx.sample.persistance;
+package com.spx.general.persistance;
 
 import java.util.Properties;
 
@@ -15,7 +15,7 @@ import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
 import com.spx.containment.persistance.ContainmentAccess;
-import com.spx.sample.ApplicationConfiguration;
+import com.spx.general.ApplicationConfiguration;
 
 public class ContainmentEntityBuilder extends EntityManagerBuilder {
 

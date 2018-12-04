@@ -1,4 +1,4 @@
-package com.spx.sample.model;
+package com.spx.general.model;
 
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Repository;

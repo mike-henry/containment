@@ -1,4 +1,4 @@
-package com.spx.sample;
+package com.spx.general;
 
 
 import java.util.Properties;

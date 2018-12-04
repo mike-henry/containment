@@ -15,7 +15,7 @@ import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import org.slf4j.Logger;
 
 import com.google.common.collect.Sets;
-import com.spx.sample.ApplicationConfiguration;
+import com.spx.general.ApplicationConfiguration;
 
 
 class DropwizardCdiExtension implements Extension {

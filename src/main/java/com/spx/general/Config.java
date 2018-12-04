@@ -1,4 +1,4 @@
-package com.spx.sample;
+package com.spx.general;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

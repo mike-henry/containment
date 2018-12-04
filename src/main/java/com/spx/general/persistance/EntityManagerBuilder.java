@@ -1,4 +1,4 @@
-package com.spx.sample.persistance;
+package com.spx.general.persistance;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
 
-import com.spx.sample.ApplicationConfiguration;
+import com.spx.general.ApplicationConfiguration;
 import com.spx.session.AuthorityAccess;
 
 import io.dropwizard.db.DataSourceFactory;

@@ -1,4 +1,4 @@
-package com.spx.sample.persistance;
+package com.spx.general.persistance;
 
 import java.lang.annotation.Annotation;
 

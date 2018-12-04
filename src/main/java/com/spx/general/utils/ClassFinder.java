@@ -1,4 +1,4 @@
-package com.spx.sample.utils;
+package com.spx.general.utils;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;

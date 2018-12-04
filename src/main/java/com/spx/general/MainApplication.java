@@ -1,4 +1,4 @@
-package com.spx.sample;
+package com.spx.general;
 
 
 
@@ -9,8 +9,7 @@ import javax.ws.rs.ext.Provider;
 import org.jboss.weld.environment.se.Weld;
 
 import com.spx.dropwizard.extensions.BeanFactory;
-import com.spx.sample.api.errors.NotFoundErrorMapper;
-import com.spx.sample.utils.ClassFinder;
+import com.spx.general.utils.ClassFinder;
 import com.spx.session.SessionSecurityInterceptor;
 
 import io.dropwizard.Application;
@@ -26,9 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MainApplication  extends Application<ApplicationConfiguration>{
 	
-	  private final ClassFinder classFinder;
+	private final ClassFinder classFinder;
 	 
-	  public MainApplication(ClassFinder classFinder) {
+	public MainApplication(ClassFinder classFinder) {
         this.classFinder=classFinder;
     }
 
@@ -46,7 +45,6 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 	    public void initialize(Bootstrap<ApplicationConfiguration> bootstrap) {
 	    	 addSwaggerBundle(bootstrap);
 	    	 addMigrationBundle(bootstrap);
-	    	
 	    }
 
         private void addMigrationBundle(Bootstrap<ApplicationConfiguration> bootstrap) {

@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 import org.apache.deltaspike.data.api.EntityManagerResolver;
 
-import com.spx.sample.persistance.FilteredEntityScanner;
+import com.spx.general.persistance.FilteredEntityScanner;
 
 public class AuthorityEntityScanner extends FilteredEntityScanner  implements  EntityManagerResolver {
 

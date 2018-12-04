@@ -6,7 +6,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.inject.Inject;
 
-import com.spx.sample.ApplicationConfiguration;
+import com.spx.general.ApplicationConfiguration;
 
 
 public class HibernateExtension implements Extension {
