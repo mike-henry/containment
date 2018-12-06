@@ -8,9 +8,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -36,6 +42,10 @@ public class InventoryRequestTest {
     InventoryRequestAllocationService subject;
     InventoryAllocationRepository inventoryAllocationRepository;
     
+    
+    Map<UUID,Allocation>  mockStore = new HashMap<UUID,Allocation>();
+    
+    
     @Before
     public void init(){
         repository = mock(InventoryRepository.class);
@@ -45,16 +55,42 @@ public class InventoryRequestTest {
         supplyChainService = new SupplyChainService(ledger);
         
         inventoryAllocationRepository=mock(InventoryAllocationRepository.class);
-        when(inventoryAllocationRepository.save(any(Allocation.class))).thenAnswer(new Answer<Allocation>() {
+        initMockRepository(inventoryAllocationRepository);
+        
+        subject = new InventoryRequestAllocationService(ledger, supplyChainService,inventoryAllocationRepository);
+    }
+
+
+	private void initMockRepository(InventoryAllocationRepository repository) {
+		when(repository.save(any(Allocation.class))).thenAnswer(new Answer<Allocation>() {
             @Override
             public Allocation answer(InvocationOnMock invocation) throws Throwable {
               Object[] args = invocation.getArguments();
-              return (Allocation) args[0];
+              Allocation value = (Allocation) args[0];
+              value.getInventory().setId(UUID.randomUUID());
+              mockStore.put(value.getId(), value);
+              return value;
             }
           });
         
         
-        subject = new InventoryRequestAllocationService(ledger, supplyChainService,inventoryAllocationRepository);
+        when(repository.findByInventory(any(Inventory.class))). thenAnswer(new Answer<Collection<Allocation>>() {
+            @Override
+            public Collection<Allocation> answer(InvocationOnMock invocation) throws Throwable {
+              Object[] args = invocation.getArguments();
+              Inventory value = (Inventory) args[0];
+              return mockStore.values()
+              .stream()
+              .filter(a -> a.getInventory().getId().equals(value.getId()))
+              .collect(Collectors.toList());
+            }
+          });
+	}
+    
+    
+    @After
+    public void cleanup() {
+    	this.mockStore.clear();
     }
     
     @Test
@@ -184,8 +220,11 @@ public class InventoryRequestTest {
         Container fromChild = new Container();
         from.addChild(fromChild);
         Inventory inventory = new Inventory(fromChild, inventoryQuantity, wantedProduct1,"dummy");
+        inventory.setId(UUID.randomUUID());
         Inventory inventory2 = new Inventory(fromChild, inventoryQuantity, wantedProduct1,"dummy2");
+        inventory2.setId(UUID.randomUUID());
         Inventory inventory3 = new Inventory(fromChild, inventoryQuantity, wantedProduct1,"dummy3");
+        inventory3.setId(UUID.randomUUID());
         inventoryFound.add(inventory);
         inventoryFound.add(inventory2);
         inventoryFound.add(inventory3);
@@ -213,6 +252,78 @@ public class InventoryRequestTest {
         });
     }
 
+    @Test
+    public  void  allocateForTwoRequests(){
+        String  demandName = "d1";
+        final int wantedQuantity = 10;
+        final int inventoryQuantity = 5;
+        
+        Product wantedProduct1 = new Product();
+        wantedProduct1.setDescription("widget-alpha");
+        wantedProduct1.setReference("widget-a");
+        Product wantedProduct2 = new Product();
+        wantedProduct2.setDescription("widget-beta");
+        wantedProduct2.setReference("widget-b"); 
+        List<Inventory> inventoryFound = new ArrayList<Inventory>();
+        when(repository.findByContainer(from)).thenReturn(inventoryFound);
+        Container fromChild = new Container();
+        from.addChild(fromChild);
+        Inventory inventory = new Inventory(fromChild, inventoryQuantity, wantedProduct1,"dummy");
+        inventory.setId(UUID.randomUUID());
+        
+        Inventory inventory2 = new Inventory(fromChild, inventoryQuantity, wantedProduct1,"dummy2");
+        inventory2.setId(UUID.randomUUID());
+        
+        Inventory inventory3 = new Inventory(fromChild, inventoryQuantity, wantedProduct1,"dummy3");
+        inventory3.setId(UUID.randomUUID());
+        
+        inventoryFound.add(inventory);
+        inventoryFound.add(inventory2);
+        inventoryFound.add(inventory3);
+        
+        
+        
+        supplyChainService.addSupplyLink(wantedProduct1, from, to);
+        supplyChainService.addSupplyLink(wantedProduct2, from, to);
+
+        Request request = new Request.Builder(demandName)
+        		 .destination(to)
+        		 .requiredItem(wantedProduct1,wantedQuantity)
+        		 .build();
+        
+        Request request2 = new Request.Builder("d2")
+       		 .destination(to)
+       		 .requiredItem(wantedProduct1,20)
+       		 .build();
+ 
+        subject.allocateTo(request);
+        subject.allocateTo(request2);
+     
+        long itemsWithAllocations = subject.getAllocations(request).count();
+        assertEquals(2,itemsWithAllocations);  /// quantity of 5 each
+        int totalAllocatedForRequest1 = subject.getAllocations(request)
+        .mapToInt(a -> a.getQuantity())
+        .sum();
+    
+        int totalAllocatedForRequest2 = subject.getAllocations(request2)
+        		.mapToInt(a -> a.getQuantity())
+        		.sum();
+         assertEquals(totalAllocatedForRequest1,wantedQuantity);
+        
+        subject.getAllocations(request).forEach(a -> {
+           assertEquals(inventoryQuantity,a.getQuantity() );
+        });
+        
+       
+       int totalQuantity=inventory.getQuantity() + inventory2.getQuantity()+ inventory3.getQuantity();
+       assertEquals(totalQuantity,   (totalAllocatedForRequest1+totalAllocatedForRequest2));   
+       assertEquals(2,subject.getAllocations(request).count());
+       assertEquals(1,subject.getAllocations(request2).count());
+       
+    }
+
+    
+    
     
     @Test
     public  void  allocateMultiInventoryWithNonExtactAvailable(){
@@ -303,7 +414,6 @@ public class InventoryRequestTest {
                 break;
             }
            
-           System.err.println(a.getInventory().getReference()  +":"+a.getQuantity());
         });
     }
 

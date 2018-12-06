@@ -16,7 +16,12 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
 import com.spx.containment.persistance.ContainmentAccess;
 import com.spx.general.ApplicationConfiguration;
+import com.spx.general.PeristanceConfiguration;
 
+import lombok.extern.slf4j.Slf4j;
+
+
+@Slf4j
 public class ContainmentEntityBuilder extends EntityManagerBuilder {
 
     @Inject
@@ -35,16 +40,17 @@ public class ContainmentEntityBuilder extends EntityManagerBuilder {
     @Produces
     @ContainmentAccess
     public EntityManagerFactory getContainmentEntityManagerFactory() {
+    	PeristanceConfiguration dbConfig = configuration.getContainment().getDatabase();
         Properties persistanceUnitProperties = new Properties();
         persistanceUnitProperties.put(OgmProperties.ENABLED, Boolean.TRUE.toString());
         persistanceUnitProperties.put(OgmProperties.DATASTORE_PROVIDER,"neo4j_bolt");
         persistanceUnitProperties.put("hibernate.cache.use_structured_entries", "true");
-        persistanceUnitProperties.put(OgmProperties.HOST,"localhost:7687");
-        persistanceUnitProperties.put(OgmProperties.USERNAME,"neo4j");
-        persistanceUnitProperties.put(OgmProperties.PASSWORD,"ignit10n");
+        persistanceUnitProperties.put(OgmProperties.HOST,dbConfig.getUrl());
+        persistanceUnitProperties.put(OgmProperties.USERNAME,dbConfig.getUser());
+        persistanceUnitProperties.put(OgmProperties.PASSWORD,dbConfig.getPassword());       
         persistanceUnitProperties.put(OgmProperties.DATABASE, configuration.getContainment().getDatabaseName());
         EntityManagerFactory factory = Persistence
-                .createEntityManagerFactory(configuration.getContainment().getPersistanceUnit(), persistanceUnitProperties);
+                .createEntityManagerFactory(dbConfig.getPersistanceUnit(), persistanceUnitProperties);
         return factory;
     }
 

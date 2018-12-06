@@ -5,11 +5,10 @@ import java.util.Properties;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Getter;
+import lombok.Data;
 
 
-@Getter
-
+@Data
 public class PeristanceConfiguration {
     
     
@@ -19,12 +18,9 @@ public class PeristanceConfiguration {
     public Properties getProperties() {
         return properties;
     }
-
    
     //whether or not idle connections should be validated
     boolean checkConnectionWhileIdle= false;
-
-  
 
     //the name of your JDBC driver
     private String driverClass;
@@ -38,18 +34,18 @@ public class PeristanceConfiguration {
     private int minSize;
 
     // the password
-    private String password;
+    private String password = "container-password";
 
     // the JDBC URL
     private String url;
 
     //the user name
-    private String user;
+    private String user = "container-user";
 
     //the SQL query to run when validating a connection's liveness
-    String validationQuery;
+    private String validationQuery;
 
-    
-
+    @JsonProperty
+    private String persistanceUnit = "containmentPU";
 
 }

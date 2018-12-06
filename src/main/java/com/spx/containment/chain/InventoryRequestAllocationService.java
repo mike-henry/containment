@@ -19,11 +19,7 @@ import com.spx.inventory.services.InventoryLedger;
 
 @RequestScoped
 public class InventoryRequestAllocationService {
-    
-  
-    /// this is not real...yet
-    List<Allocation> allocations = new ArrayList<Allocation>();
-
+ 
     private final InventoryLedger ledger;
     private final SupplyChainService supplyChainService;
 	private final InventoryAllocationRepository inventoryAllocationRepository;
@@ -46,43 +42,41 @@ public class InventoryRequestAllocationService {
   
    private void allocateInventoryTo(final Request request,BOMItem item) {
        SupplyChainLink chain = supplyChainService.getSupplyChainFor(request.getDestination(),item.getProduct()).orElseThrow( () ->new RuntimeException("No supply chain found"));
-       Stream<Inventory> inventoryOfProduct = ledger.getContainerContentsOfProduct(chain.getFrom(), item.getProduct()) ;
-       AtomicInteger alloctedSoFar = new AtomicInteger(0);
-       inventoryOfProduct
-       .forEach(inventory -> {
-           if (alloctedSoFar.get() < item.getQuantity()) {
+       List<Inventory> inventoryOfProduct = ledger.getContainerContentsOfProduct(chain.getFrom(), item.getProduct()) ;
+       int alloctedSoFar = 0;
+       
+       for(Inventory inventory:inventoryOfProduct) {
+           if (alloctedSoFar < item.getQuantity()) {
                int free = getFreeQuantity(inventory);
-               int allocationQuanity = Math.min(item.getQuantity() - alloctedSoFar.get(), free);
+               int allocationQuanity = Math.min(item.getQuantity() - alloctedSoFar, free);
+               if (allocationQuanity == 0 ) continue;
                createAllocation(request, inventory, allocationQuanity);
-               alloctedSoFar.addAndGet(allocationQuanity);
+               alloctedSoFar+=allocationQuanity;
            }
-       });
+       }
    }
   
    private void createAllocation(final Request request, Inventory inventory, int quanity) {
-	   Allocation.Builder builder = new Allocation.Builder();
+       Allocation.Builder builder = new Allocation.Builder();
 	   Allocation allocation = builder
-		.inventory(inventory)
-		.request(request)
-		.quantity(quanity)
-		.build();
+	   	   .inventory(inventory)
+		   .request(request)
+		   .quantity(quanity)
+		   .build();
 	   allocation=   inventoryAllocationRepository.save(allocation);
-	 //  request.getAllocations().add(allocation);
+	   request.getAllocations().add(allocation);
    }
 
     private int getFreeQuantity(Inventory inventory) {
-       int totalAllocated=this.allocations.stream()
-         .filter(a -> a.getInventory().equals(inventory))
+         int totalAllocated=inventoryAllocationRepository.findByInventory(inventory)
+         .stream()
          .mapToInt(a -> a.getQuantity())
          .sum();
        return inventory.getQuantity() - totalAllocated;
     }
     
     public Stream <Allocation> getAllocations(Request request){
-       return null;
-    		//   request.getAllocations().stream();
+       return request.getAllocations().stream();
     }
 
 }
-
-

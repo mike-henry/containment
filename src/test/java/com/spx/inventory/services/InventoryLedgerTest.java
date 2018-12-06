@@ -71,8 +71,8 @@ public class InventoryLedgerTest {
         when(containerServices.getDecendants(container)).thenReturn(desendants);
         
         assertEquals(3,subject.getContainerContentsOfProduct(container, product1)
-        .count() );
-        assertEquals(1,subject.getContainerContentsOfProduct(container, product2).count());
+        .size());
+        assertEquals(1,subject.getContainerContentsOfProduct(container, product2).size());
     }
 
     @Test

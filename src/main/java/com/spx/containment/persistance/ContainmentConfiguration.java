@@ -1,6 +1,7 @@
 package com.spx.containment.persistance;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.spx.general.PeristanceConfiguration;
 
 import io.dropwizard.db.DataSourceFactory;
 import lombok.Data;
@@ -16,20 +17,17 @@ public class ContainmentConfiguration {
     
     @JsonProperty
     private String  databaseName = "containment";
-    
-//    @JsonProperty
-//    private String datastoreProvider = org.hibernate.ogm.datastore.mongodb.impl.MongoDBDatastoreProvider.class.getName();
 
     @JsonProperty
     private DataSourceFactory containmentDataSource = new DataSourceFactory();
     
-//    @JsonProperty
-//    private String databasePassword = "password";
-//    @JsonProperty
-//    private String databaseUser = "root";
+    @JsonProperty
+    private PeristanceConfiguration database = new PeristanceConfiguration(); 
     
     @JsonProperty
     private String persistanceUnit = "containmentPU";
+    
+    
 
     
 }

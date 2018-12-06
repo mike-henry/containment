@@ -65,7 +65,7 @@ public class Allocation {
         
         public Allocation build() {
           Allocation result = new Allocation(request.getDestination(),  quantity,  inventory,  request);
-        
+          result.id=UUID.randomUUID();
           return result;
         }
         

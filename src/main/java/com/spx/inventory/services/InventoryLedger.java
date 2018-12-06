@@ -1,8 +1,8 @@
 package com.spx.inventory.services;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,8 +13,6 @@ import com.spx.containment.services.ContainerServices;
 import com.spx.inventory.model.Inventory;
 import com.spx.inventory.repository.InventoryRepository;
 import com.spx.product.model.Product;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Named
 @Transactional
@@ -37,12 +35,13 @@ public class InventoryLedger {
        .add(inventory);
     }
     
-    public Stream<Inventory> getContainerContentsOfProduct(Container container, Product product){
+    public List<Inventory> getContainerContentsOfProduct(Container container, Product product){
        return containerServices.getDecendants(container)
       .stream()
       .map(c -> repository.findByContainer(c))
       .flatMap(inventoryCollection -> inventoryCollection.stream())
-      .filter(inventory -> inventory.getProduct().equals(product));
+      .filter(inventory -> inventory.getProduct().equals(product))
+      .collect(Collectors.toList());
     }
     
     public boolean containerHasProduct(Product product, Container in) {        
