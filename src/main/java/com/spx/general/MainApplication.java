@@ -81,8 +81,9 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 			classFinder.findClassesWithAnnotation(configuration.getApplicationPackages(),Path.class)
 			.forEach(type ->environment.jersey().register(type));
 			classFinder.findClassesWithAnnotation(configuration.getApplicationPackages(),Provider.class)
+			.filter(c -> c.getPackage().getName().startsWith("com.spx"))
 			.filter(c -> c != com.spx.session.SessionSecurityInterceptor.class )
-			.peek(c->log.info("Registering class as jersery resource{}",c.getName()))
+			.peek(c->log.info("Registering class as jersey resource {}",c.getName()))
 			.forEach(type ->environment.jersey().getResourceConfig().register(type));
 		}
 }

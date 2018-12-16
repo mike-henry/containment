@@ -1,8 +1,6 @@
 package com.spx.containment.chain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import javax.enterprise.context.RequestScoped;

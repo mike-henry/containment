@@ -6,16 +6,14 @@ import java.util.Map;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
-
 import com.spx.general.ApplicationConfiguration;
 import com.spx.session.AuthorityAccess;
 
 import io.dropwizard.db.DataSourceFactory;
 
-/// too big split into Three classes
 public class EntityManagerBuilder {
     
     private static final String DEFAULT_PU = "myPU";
@@ -37,8 +35,6 @@ public class EntityManagerBuilder {
         persistenceMap.put("format_sql", Boolean.TRUE.toString());
         persistenceMap.put("hibernate.ejb.resource_scanner",com.spx.session.AuthorityEntityScanner.class.getName().toString());
         persistenceMap.put("hibernate.archive.autodetection", "class");
-        
-        
         return persistenceMap;
     }
 
@@ -48,31 +44,20 @@ public class EntityManagerBuilder {
         return result;
     }
     
-    
     @Produces
     @AuthorityAccess
     public EntityManager getAuthorityEntityManager() {
         return getEntityManager();
     }
-    
-    
-    
-
-    
+  
     private EntityManager createEntityManager(String persistanceUnitName,Map<String, String> persistenceMap) {
         HibernatePersistenceProvider pp = new HibernatePersistenceProvider();
-        final EntityManagerFactoryImpl
-        factory = (EntityManagerFactoryImpl) pp.createEntityManagerFactory(persistanceUnitName, persistenceMap);
+        EntityManagerFactory factory = pp.createEntityManagerFactory(persistanceUnitName, persistenceMap);
         return factory.createEntityManager();
     }
-    
-    
+
     private EntityManager doCreatEntitityManagerFromPersitanceUnit(String persistanceUnitName, DataSourceFactory database) {
         Map<String, String> persistenceMap = getDatabasConfiguration(database);
         return createEntityManager(persistanceUnitName,persistenceMap);      
     }
-    
-    
-    
-    
 }

@@ -1,4 +1,3 @@
-
 server:
   registerDefaultExceptionMappers: false
   applicationConnectors:

@@ -12,11 +12,15 @@ import com.spx.containment.model.Container;
 import com.spx.containment.model.Referenceable;
 import com.spx.product.model.Product;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 
-@Data
+@Getter
+@Setter
 @Entity
+@EqualsAndHashCode(callSuper=true)
 public class Request extends Referenceable { 
     
  
