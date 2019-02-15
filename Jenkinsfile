@@ -8,9 +8,9 @@ pipeline {
         }
     }
     stages {
-        stage('Main Compile') {
+        stage('Build') { 
             steps {
-                echo 'Sample containtment stage' 
+                sh 'mvn clean package' 
             }
         }
     }
