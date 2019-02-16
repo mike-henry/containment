@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.spx.containment.chain.model.Allocation;
 import com.spx.containment.chain.model.BOMItem;
@@ -15,7 +16,8 @@ import com.spx.inventory.model.Inventory;
 import com.spx.inventory.services.InventoryLedger;
 
 
-@RequestScoped
+//@RequestScoped
+@Named
 public class InventoryRequestAllocationService {
  
     private final InventoryLedger ledger;

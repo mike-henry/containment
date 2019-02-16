@@ -19,8 +19,6 @@
 		<ogm.version>5.1.0.Final</ogm.version>
 	</properties>
 
-
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -110,11 +108,11 @@
 			<version>${cdi-api.version}</version>
 		</dependency>
 
-		<dependency>
+		<!--  dependency>
 			<groupId>org.jboss.weld.se</groupId>
 			<artifactId>weld-se-core</artifactId>
 			<version>${weld.version}</version>
-		</dependency>
+		</dependency-->
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet-core -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
@@ -122,11 +120,11 @@
 			<version>${jersey.version}</version>
 		</dependency>
 
-		<dependency>
+		<!--  -dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet</artifactId>
 			<version>${weld.version}</version>
-		</dependency>
+		</dependency-->
 
 
 		<dependency>
@@ -146,6 +144,12 @@
 			<groupId>com.smoketurner</groupId>
 			<artifactId>dropwizard-swagger</artifactId>
 			<version>1.0.6-1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
@@ -198,11 +202,11 @@
 			<version>1.2.5</version>
 		</dependency>
 
-		<dependency>
+		<!--  dependency>
 			<groupId>org.glassfish.jersey.ext.cdi</groupId>
 			<artifactId>jersey-weld2-se</artifactId>
 			<version>2.23.2</version>
-		</dependency>
+		</dependency-->
 
 
 		<dependency>
@@ -210,6 +214,18 @@
 			<artifactId>resteasy-jackson2-provider</artifactId>
 		</dependency>
 
+<!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+<dependency>
+    <groupId>org.reflections</groupId>
+    <artifactId>reflections</artifactId>
+    <version>0.9.10</version>
+    <exclusions>
+    	<exclusion>
+    		<groupId>com.google.guava</groupId>
+    		<artifactId>guava</artifactId>
+    	</exclusion>
+    </exclusions>
+</dependency>
 
 
 
@@ -303,7 +319,18 @@
 
 		</dependency>
 
-
+<!-- https://mvnrepository.com/artifact/org.apache.openwebbeans/openwebbeans-impl -->
+<dependency>
+    <groupId>org.apache.openwebbeans</groupId>
+    <artifactId>openwebbeans-impl</artifactId>
+  
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.openwebbeans/openwebbeans-impl -->
+<dependency>
+    <groupId>org.apache.openwebbeans</groupId>
+    <artifactId>openwebbeans-spi</artifactId>
+  
+</dependency>
 
 
 
@@ -324,10 +351,6 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.0.0</version>
 		</dependency>
-
-
-
-
 
 	</dependencies>
 

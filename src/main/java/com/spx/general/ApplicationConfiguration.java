@@ -3,6 +3,7 @@ package com.spx.general;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Vetoed;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -15,7 +16,8 @@ import io.dropwizard.db.DataSourceFactory;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 
-@Vetoed 
+//@Vetoed 
+@Default
 public class ApplicationConfiguration extends Configuration {
 
 	private List<String> applicationPackages = new ArrayList<String>();

@@ -5,6 +5,8 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -20,17 +22,21 @@ import lombok.extern.slf4j.Slf4j;
 
 @ApplicationScoped
 @Slf4j
+@Any
+@Default
 public class ShiroBootstrap {
 
     private static final String REALMS = "realms";
     private static final String REALM_JNDI_NAME = REALMS+"/ApplRealm";
    
-    private final BeanManager beanManager;
+    private  BeanManager beanManager;
 
     public ShiroBootstrap(BeanManager beanManager) {
         this.beanManager = beanManager;
     }
-
+ 
+    public ShiroBootstrap() {
+    }
 
     @PostConstruct
     public void setup() {

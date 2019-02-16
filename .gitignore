@@ -11,3 +11,5 @@ release.properties
 *.iml
 .settings/
 /ObjectStore/
+/.gradle/
+/build/

@@ -6,7 +6,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.Path;
 import javax.ws.rs.ext.Provider;
 
-import org.jboss.weld.environment.se.Weld;
+import org.apache.webbeans.config.WebBeansContext;
+import org.apache.webbeans.spi.ContainerLifecycle;
+
+//import org.jboss.weld.environment.se.Weld;
 
 import com.spx.dropwizard.extensions.BeanFactory;
 import com.spx.general.utils.ClassFinder;
@@ -27,12 +30,15 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 	
 	private final ClassFinder classFinder;
 	 
+	
+	static ContainerLifecycle  lifecycle;
 	public MainApplication(ClassFinder classFinder) {
         this.classFinder=classFinder;
     }
 
     public static void main(String[] args) throws Exception {
 	      ClassFinder classFinder = new ClassFinder();
+	     
 	        new MainApplication(classFinder).run(args);
 	    }
 
@@ -68,16 +74,27 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 	    public void run(ApplicationConfiguration configuration,
 	                    Environment environment) {
 	    	registerResources( configuration,  environment);
-	    	Weld weld = new Weld();
+	    //	Weld weld = new Weld();
 	    	BeanFactory beanFactory= new BeanFactory();
-	    	weld.addExtension(new com.spx.dropwizard.extensions.ConfigWeldExtension(configuration,beanFactory));
-	    	weld.addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
-	    	environment.jersey().register(SessionSecurityInterceptor.class);
-	    	environment.jersey().getResourceConfig().register(org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider.class);
-	    	weld.initialize();
+	    	
+	    	
+	    	lifecycle = WebBeansContext.currentInstance().getService(ContainerLifecycle.class);
+	        lifecycle.startApplication(null);
+	        WebBeansContext.currentInstance().getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
+	    	
+	    //	weld.addExtension(new com.spx.dropwizard.extensions.ConfigWeldExtension(configuration,beanFactory));
+	    //	weld.addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
+	   // 	environment.jersey().register(SessionSecurityInterceptor.class);
+	    //	environment.jersey().getResourceConfig().register(org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider.class);
+	    //	weld.initialize();
 	    }
-
+	   
 		private void registerResources(ApplicationConfiguration configuration, Environment environment) {
+			
+			
+			
+			
+			
 			classFinder.findClassesWithAnnotation(configuration.getApplicationPackages(),Path.class)
 			.forEach(type ->environment.jersey().register(type));
 			classFinder.findClassesWithAnnotation(configuration.getApplicationPackages(),Provider.class)

@@ -4,7 +4,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
 import javax.annotation.security.PermitAll;
-import javax.enterprise.context.Dependent;
+//import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
@@ -27,7 +27,7 @@ import io.swagger.annotations.Api;
 @Consumes({ APPLICATION_JSON, TEXT_PLAIN })
 @Path(ContainmentResource.PATH)
 @Api(ContainmentResource.PATH)
-@Dependent
+//@Dependent
 @Transactional(value=TxType.REQUIRED)
 public class ContainmentResource {
 
