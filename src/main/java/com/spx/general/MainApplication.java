@@ -2,8 +2,14 @@ package com.spx.general;
 
 
 
+import java.util.Set;
+
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
 
 import org.apache.webbeans.config.WebBeansContext;
@@ -80,21 +86,18 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 	    	
 	    	lifecycle = WebBeansContext.currentInstance().getService(ContainerLifecycle.class);
 	        lifecycle.startApplication(null);
+	     
 	        WebBeansContext.currentInstance().getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
-	    	
+	     
 	    //	weld.addExtension(new com.spx.dropwizard.extensions.ConfigWeldExtension(configuration,beanFactory));
 	    //	weld.addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
-	   // 	environment.jersey().register(SessionSecurityInterceptor.class);
+	   	//environment.jersey().register(SessionSecurityInterceptor.class);
 	    //	environment.jersey().getResourceConfig().register(org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider.class);
 	    //	weld.initialize();
 	    }
 	   
 		private void registerResources(ApplicationConfiguration configuration, Environment environment) {
-			
-			
-			
-			
-			
+
 			classFinder.findClassesWithAnnotation(configuration.getApplicationPackages(),Path.class)
 			.forEach(type ->environment.jersey().register(type));
 			classFinder.findClassesWithAnnotation(configuration.getApplicationPackages(),Provider.class)
