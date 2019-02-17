@@ -2,24 +2,15 @@ package com.spx.general;
 
 
 
-import java.util.Set;
-
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
 
 import org.apache.webbeans.config.WebBeansContext;
 import org.apache.webbeans.spi.ContainerLifecycle;
 
-//import org.jboss.weld.environment.se.Weld;
-
 import com.spx.dropwizard.extensions.BeanFactory;
 import com.spx.general.utils.ClassFinder;
-import com.spx.session.SessionSecurityInterceptor;
 
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
