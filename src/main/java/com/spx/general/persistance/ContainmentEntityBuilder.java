@@ -15,8 +15,8 @@ import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
 import com.spx.containment.persistance.ContainmentAccess;
-import com.spx.general.ApplicationConfiguration;
 import com.spx.general.PeristanceConfiguration;
+import com.spx.general.config.ApplicationConfiguration;
 
 import lombok.extern.slf4j.Slf4j;
 

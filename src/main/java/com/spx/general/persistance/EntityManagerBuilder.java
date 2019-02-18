@@ -9,7 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
-import com.spx.general.ApplicationConfiguration;
+
+import com.spx.general.config.ApplicationConfiguration;
 import com.spx.session.AuthorityAccess;
 
 import io.dropwizard.db.DataSourceFactory;

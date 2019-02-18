@@ -18,7 +18,7 @@ import javax.ws.rs.ext.Provider;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.subject.Subject;
 
-import com.spx.general.ApplicationConfiguration;
+import com.spx.general.config.ApplicationConfiguration;
 
 import lombok.extern.slf4j.Slf4j;
 

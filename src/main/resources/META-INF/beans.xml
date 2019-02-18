@@ -5,4 +5,7 @@
  <interceptors>
   <class>com.spx.general.persistance.TransactionInterceptor</class>
  </interceptors>
+ <scan>
+  <exclude name="com.spx.general.config.**" />
+ </scan>
 </beans>

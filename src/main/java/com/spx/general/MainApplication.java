@@ -10,6 +10,7 @@ import org.apache.webbeans.config.WebBeansContext;
 import org.apache.webbeans.spi.ContainerLifecycle;
 
 import com.spx.dropwizard.extensions.BeanFactory;
+import com.spx.general.config.ApplicationConfiguration;
 import com.spx.general.utils.ClassFinder;
 
 import io.dropwizard.Application;
@@ -76,11 +77,12 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 	    	
 	    	
 	    	lifecycle = WebBeansContext.currentInstance().getService(ContainerLifecycle.class);
+	     
+	   //     WebBeansContext.currentInstance().getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
+	        WebBeansContext.currentInstance().getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ConfigExtension(configuration,beanFactory));
 	        lifecycle.startApplication(null);
 	     
-	        WebBeansContext.currentInstance().getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
-	     
-	    //	weld.addExtension(new com.spx.dropwizard.extensions.ConfigWeldExtension(configuration,beanFactory));
+	    //	weld.addExtension(new com.spx.dropwizard.extensions.ConfigExtension(configuration,beanFactory));
 	    //	weld.addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
 	   	//environment.jersey().register(SessionSecurityInterceptor.class);
 	    //	environment.jersey().getResourceConfig().register(org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider.class);

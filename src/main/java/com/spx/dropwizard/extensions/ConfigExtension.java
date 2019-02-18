@@ -1,25 +1,26 @@
 package com.spx.dropwizard.extensions;
 
+import java.util.Set;
+
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
+import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
-import javax.inject.Inject;
 
 import com.spx.general.config.ApplicationConfiguration;
 
 
-public class HibernateExtension implements Extension {
+public class ConfigExtension implements Extension {
 
 	
-	private final ApplicationConfiguration config;
-    private final BeanFactory beanFactory;
+	final ApplicationConfiguration config;
 	
-   
+    final BeanFactory beanFactory;
 
    
-@Inject
-    public HibernateExtension(ApplicationConfiguration config,BeanFactory beanFactory){
+
+    public ConfigExtension(ApplicationConfiguration config,BeanFactory beanFactory){
         this.config=config;
         this.beanFactory=beanFactory;
     }
@@ -28,15 +29,10 @@ public class HibernateExtension implements Extension {
 
 
     void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
-    //    JPAHibernateBootstrapper jpaBootStrapper = new JPAHibernateBootstrapper(config);
-//        abd.addBean( beanFactory.createBean(bm,jpaBootStrapper) );
+    	// Set<Bean<?>> x = bm.getBeans(ApplicationConfiguration.class, null);
+        abd.addBean( beanFactory.createBean(bm,config) );
+     
     }
-
-
-  
-
-
-    
 
     
 }

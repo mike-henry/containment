@@ -5,7 +5,7 @@ import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 
-import com.spx.general.ApplicationConfiguration;
+import com.spx.general.config.ApplicationConfiguration;
 import com.spx.session.shiro.ShiroBootstrap;
 
 

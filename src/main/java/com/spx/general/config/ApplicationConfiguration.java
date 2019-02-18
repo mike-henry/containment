@@ -1,4 +1,4 @@
-package com.spx.general;
+package com.spx.general.config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,13 @@ import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 
 //@Vetoed 
-@Default
+//@Default
 public class ApplicationConfiguration extends Configuration {
+	
+	
+	public ApplicationConfiguration() {
+		System.out.println("HELLO");
+	}
 
 	private List<String> applicationPackages = new ArrayList<String>();
 
