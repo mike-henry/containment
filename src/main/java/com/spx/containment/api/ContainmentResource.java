@@ -4,6 +4,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
 import javax.annotation.security.PermitAll;
+import javax.enterprise.context.RequestScoped;
 //import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -29,6 +30,8 @@ import io.swagger.annotations.Api;
 @Api(ContainmentResource.PATH)
 //@Dependent
 @Transactional(value=TxType.REQUIRED)
+
+
 public class ContainmentResource {
 
     public final static String RESOURCE = "containers";
@@ -40,6 +43,8 @@ public class ContainmentResource {
     private final ContainerActionFactory actionFactory;
     private final ActionExecutor executor;
 
+   
+    
     @Inject
     public ContainmentResource(ContainerActionFactory actionFactory,ActionExecutor executor) {
         this.actionFactory = actionFactory;

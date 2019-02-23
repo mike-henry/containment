@@ -3,6 +3,10 @@ package com.spx.general;
 
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 import javax.ws.rs.Path;
 import javax.ws.rs.ext.Provider;
 
@@ -27,6 +31,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MainApplication  extends Application<ApplicationConfiguration>{
 	
 	private final ClassFinder classFinder;
+
+
+	private ApplicationConfiguration configuration;
 	 
 	
 	static ContainerLifecycle  lifecycle;
@@ -72,25 +79,32 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 	    public void run(ApplicationConfiguration configuration,
 	                    Environment environment) {
 	    	registerResources( configuration,  environment);
-	    //	Weld weld = new Weld();
+	 
 	    	BeanFactory beanFactory= new BeanFactory();
+	    	this.configuration=configuration;
+	    	
+	    	WebBeansContext currentInstance = WebBeansContext.currentInstance();
+	    	currentInstance.getScannerService();
+			currentInstance.registerService(ApplicationConfiguration.class, configuration);
+	    	//     WebBeansContext.currentInstance().getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
+	    	lifecycle = currentInstance.getService(ContainerLifecycle.class);
 	    	
 	    	
-	    	lifecycle = WebBeansContext.currentInstance().getService(ContainerLifecycle.class);
-	     
-	   //     WebBeansContext.currentInstance().getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
-	        WebBeansContext.currentInstance().getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ConfigExtension(configuration,beanFactory));
-	        lifecycle.startApplication(null);
-	     
-	    //	weld.addExtension(new com.spx.dropwizard.extensions.ConfigExtension(configuration,beanFactory));
-	    //	weld.addExtension(new com.spx.dropwizard.extensions.ShiroWeldExtension(configuration,beanFactory));
+	    	currentInstance.getExtensionLoader().addExtension(new com.spx.dropwizard.extensions.ConfigExtension(configuration,beanFactory));
+	    	ServletContext servletContext = environment.getApplicationContext().getServletContext();
+	    	ServletContextEvent event= new ServletContextEvent(servletContext);
+			lifecycle.startApplication(event);
+	    
+	    
+
 	   	//environment.jersey().register(SessionSecurityInterceptor.class);
-	    //	environment.jersey().getResourceConfig().register(org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider.class);
-	    //	weld.initialize();
+	    
+	 
 	    }
 	   
 		private void registerResources(ApplicationConfiguration configuration, Environment environment) {
 
+		
 			classFinder.findClassesWithAnnotation(configuration.getApplicationPackages(),Path.class)
 			.forEach(type ->environment.jersey().register(type));
 			classFinder.findClassesWithAnnotation(configuration.getApplicationPackages(),Provider.class)
@@ -99,4 +113,6 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 			.peek(c->log.info("Registering class as jersey resource {}",c.getName()))
 			.forEach(type ->environment.jersey().getResourceConfig().register(type));
 		}
+		
+
 }

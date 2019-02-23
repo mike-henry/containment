@@ -3,6 +3,7 @@ package com.spx.general.persistance;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -40,6 +41,7 @@ public class EntityManagerBuilder {
     }
 
     @Produces 
+    @RequestScoped
     public EntityManager getEntityManager() {
         EntityManager result = doCreatEntitityManagerFromPersitanceUnit(DEFAULT_PU,configuration.getDatabase());
         return result;

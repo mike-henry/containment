@@ -5,9 +5,10 @@ import java.util.Set;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
 
 import org.apache.webbeans.config.WebBeansContext;
+import org.apache.webbeans.container.BeanManagerImpl;
+import org.apache.webbeans.context.RequestContext;
 import org.glassfish.hk2.api.MultiException;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.jvnet.hk2.internal.ServiceLocatorImpl;
@@ -49,8 +50,11 @@ class WebBeanServiceLocator extends ServiceLocatorImpl {
 	@SuppressWarnings("unchecked")
 	<T> T getWebBean(Class<T> contractOrImpl, Annotation... qualifiers) {
 		log.info("fetching service {} from WebBeans", contractOrImpl.getName());
-		BeanManager bm = webBeansContext.getBeanManagerImpl();
+		BeanManagerImpl bm = webBeansContext.getBeanManagerImpl();
+		
 		Set<Bean<?>> beans = bm.getBeans(contractOrImpl, qualifiers);
+		RequestContext rc = new RequestContext();
+
 		CreationalContext<?> creationalContext = bm.createCreationalContext(beans.stream().findFirst().get());
 		T object = (T) bm.getReference(beans.stream().findFirst().get(), contractOrImpl, creationalContext);
 		return object;

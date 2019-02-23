@@ -13,11 +13,12 @@
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dropwizard.version>1.1.1</dropwizard.version>
 		<weld.version>2.2.8.Final</weld.version>
-		<cdi-api.version>1.2</cdi-api.version>
+		<cdi-api.version>2.0</cdi-api.version>
 		<jersey.version>2.23.2</jersey.version>
 		<jetty.version>9.2.4.v20141103</jetty.version>
 		<deltaspike.version>1.8.0</deltaspike.version>
 		<ogm.version>5.1.0.Final</ogm.version>
+		<openwebbeans.version>2.0.10</openwebbeans.version>
 	</properties>
 
 	<dependencyManagement>
@@ -324,15 +325,26 @@
 <dependency>
     <groupId>org.apache.openwebbeans</groupId>
     <artifactId>openwebbeans-impl</artifactId>
+    <version>${openwebbeans.version}</version>
+    
   <scope>compile</scope>
 </dependency>
 <!-- https://mvnrepository.com/artifact/org.apache.openwebbeans/openwebbeans-impl -->
 <dependency>
     <groupId>org.apache.openwebbeans</groupId>
     <artifactId>openwebbeans-spi</artifactId>
+  <version>${openwebbeans.version}</version>
   <scope>compile</scope>
-  
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.openwebbeans/openwebbeans-web -->
+
+<dependency>
+    <groupId>org.apache.openwebbeans</groupId>
+    <artifactId>openwebbeans-web</artifactId>
+  <version>${openwebbeans.version}</version>
+  <scope>compile</scope>
+</dependency>
+  
 
 
 

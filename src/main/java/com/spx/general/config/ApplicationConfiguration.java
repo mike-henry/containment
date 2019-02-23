@@ -3,8 +3,11 @@ package com.spx.general.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Vetoed;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -14,16 +17,16 @@ import com.spx.containment.persistance.ContainmentConfiguration;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import lombok.Data;
 
 
-//@Vetoed 
-//@Default
+
+@Data
+@Named
+@ApplicationScoped
 public class ApplicationConfiguration extends Configuration {
 	
-	
-	public ApplicationConfiguration() {
-		System.out.println("HELLO");
-	}
+
 
 	private List<String> applicationPackages = new ArrayList<String>();
 

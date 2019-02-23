@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
@@ -64,7 +65,7 @@ public class BeanFactory {
     
             @Override
             public Class<? extends Annotation> getScope() {
-                return Singleton.class;
+                return ApplicationScoped.class;
             }
     
     

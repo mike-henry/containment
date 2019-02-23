@@ -19,7 +19,10 @@ public class ContainerActionFactory {
         this.containerServices=cam;
     } 
     
-   
+    public ContainerActionFactory() {
+    	this(null,null);
+    } 
+    
     public CreateContainerTreeAction buildCreateContainerTreeAction(ContainerView[] views){
         return new CreateContainerTreeAction(mapper, containerServices, views);
     }
@@ -29,7 +32,6 @@ public class ContainerActionFactory {
         return new GetContainerTreeAction(mapper,rootName);
     }
     
-   
     public RemoveContainerAction buildRemoveContainerTreeAction(String containerName) {
         return new RemoveContainerAction(containerServices, containerName);
     }

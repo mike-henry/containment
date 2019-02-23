@@ -3,6 +3,7 @@ package com.spx.containment.actions;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
