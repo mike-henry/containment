@@ -24,7 +24,7 @@ database:
   password: password
 
   # the JDBC URL
-  url:   ${AUTH_DB_URL:-"jdbc:postgresql://containment-auth-db/testdb"}
+  url:    ${AUTH_DB_URL:-"jdbc:postgresql://host.docker.internal/testdb"}   
 
   # any properties specific to your JDBC driver:
   properties:
@@ -37,7 +37,7 @@ database:
 
   # the SQL query to run when validating a connection's liveness
   validationQuery: "/* M H Application Health Check */ SELECT 1"
-c
+
   # the minimum number of connections to keep open
   minSize: 8
 
@@ -49,5 +49,5 @@ c
 containment:
   database:
     user:  ${CONTAINMENT_DB_USER:-"test"}
-    password: ${CONTAINMENT_DB_PASSWORD:-"password"}
-    url:  ${CONTAINMENT_DB_URL:-"containment-db:7474"}
+    password: password
+    url:  ${CONTAINMENT_DB_URL:-"containment-db:7687"}

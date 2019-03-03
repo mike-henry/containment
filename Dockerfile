@@ -19,7 +19,7 @@ ENV GRADLE_HOME /usr/local/share/gradle-5.2.1
 ENV PATH "${JAVA_HOME}/bin:${GRADLE_HOME}/bin:${PATH}"
 
 ADD . /containment
-RUN ./gradlew clean  distZip
+RUN ./gradlew --no-daemon clean  distZip
 
 FROM alpine:latest as runnable
 COPY --from=build  /usr/local/share/jdk11.0.2 /usr/local/share/jdk11.0.2
