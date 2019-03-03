@@ -18,10 +18,12 @@ import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Named
 @ApplicationScoped
 public class ApplicationConfiguration extends Configuration {

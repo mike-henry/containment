@@ -2,7 +2,7 @@ server:
   registerDefaultExceptionMappers: false
   applicationConnectors:
   - type: http 
-    port: 9191
+    port:    ${PORT:-8080}
   adminConnectors:
   - type: http
     port: 9292
@@ -24,7 +24,7 @@ database:
   password: password
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/testdb
+  url:    ${AUTH_DB_URL:-"jdbc:postgresql://host.docker.internal/testdb"}   
 
   # any properties specific to your JDBC driver:
   properties:
@@ -48,6 +48,6 @@ database:
   checkConnectionWhileIdle: false
 containment:
   database:
-    user: test
+    user:  ${CONTAINMENT_DB_USER:-"test"}
     password: password
-    url:  "localhost:11001"
+    url:  ${CONTAINMENT_DB_URL:-"containment-db:7687"}
