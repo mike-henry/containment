@@ -2,7 +2,7 @@ server:
   registerDefaultExceptionMappers: false
   applicationConnectors:
   - type: http 
-    port: 9191
+    port:    ${PORT:-8080}
   adminConnectors:
   - type: http
     port: 9292
@@ -24,7 +24,7 @@ database:
   password: password
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/testdb
+  url:   ${AUTH_DB_URL:-"jdbc:postgresql://containment-auth-db/testdb"}
 
   # any properties specific to your JDBC driver:
   properties:
@@ -37,7 +37,7 @@ database:
 
   # the SQL query to run when validating a connection's liveness
   validationQuery: "/* M H Application Health Check */ SELECT 1"
-
+c
   # the minimum number of connections to keep open
   minSize: 8
 
@@ -48,6 +48,6 @@ database:
   checkConnectionWhileIdle: false
 containment:
   database:
-    user: test
-    password: password
-    url:  "localhost:11001"
+    user:  ${CONTAINMENT_DB_USER:-"test"}
+    password: ${CONTAINMENT_DB_PASSWORD:-"password"}
+    url:  ${CONTAINMENT_DB_URL:-"containment-db:7474"}

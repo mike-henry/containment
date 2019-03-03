@@ -12,12 +12,15 @@ import javax.ws.rs.ext.Provider;
 
 import org.apache.webbeans.config.WebBeansContext;
 import org.apache.webbeans.spi.ContainerLifecycle;
+import org.neo4j.cypher.internal.frontend.v2_3.perty.print.printCommandsToString;
 
 import com.spx.dropwizard.extensions.BeanFactory;
 import com.spx.general.config.ApplicationConfiguration;
 import com.spx.general.utils.ClassFinder;
 
 import io.dropwizard.Application;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -43,8 +46,12 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 
     public static void main(String[] args) throws Exception {
 	      ClassFinder classFinder = new ClassFinder();
-	     
+	     System.out.println("starting..");
+	     try {
 	        new MainApplication(classFinder).run(args);
+	     }catch (Exception e) {
+            e.printStackTrace();
+		}
 	    }
 
 	    @Override
@@ -52,11 +59,15 @@ public class MainApplication  extends Application<ApplicationConfiguration>{
 	        return "Global-Containment";
 	    }
 
-	    @Override
-	    public void initialize(Bootstrap<ApplicationConfiguration> bootstrap) {
-	    	 addSwaggerBundle(bootstrap);
-	    	 addMigrationBundle(bootstrap);
-	    }
+	@Override
+	public void initialize(Bootstrap<ApplicationConfiguration> bootstrap) {
+		bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
+			bootstrap.getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor(false))
+		);
+
+		addSwaggerBundle(bootstrap);
+		addMigrationBundle(bootstrap);
+	}
 
         private void addMigrationBundle(Bootstrap<ApplicationConfiguration> bootstrap) {
             bootstrap.addBundle(new MigrationsBundle<ApplicationConfiguration>() {
