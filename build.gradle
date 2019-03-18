@@ -26,26 +26,26 @@ ext {
 
 
 buildscript {
-    repositories {
-        jcenter {
-            url "http://jcenter.bintray.com/"
-        }
-        maven {
-           url "https://plugins.gradle.org/m2/"
-        }
-        mavenLocal()
-        mavenCentral()
-    }
+  repositories {
+    jcenter {
+      url "http://jcenter.bintray.com/"
+     }
+     maven {
+      url "https://plugins.gradle.org/m2/"
+     }
+     mavenLocal()
+     mavenCentral()
+  }
 
-    dependencies {
-       classpath 'com.github.onslip:gradle-one-jar:1.0.5'
-       classpath "org.galaxx.gradle:jandex:1.0.2"
-        classpath "io.freefair.gradle:lombok-plugin:3.1.4"
-    }
+  dependencies {
+    classpath 'com.github.onslip:gradle-one-jar:1.0.5'
+    classpath "org.galaxx.gradle:jandex:1.0.2"
+    classpath "io.freefair.gradle:lombok-plugin:3.1.4"
+  }
 }
 
 repositories {
-     maven { url "http://repo.maven.apache.org/maven2" }
+  maven { url "http://repo.maven.apache.org/maven2" }
 }
 
 

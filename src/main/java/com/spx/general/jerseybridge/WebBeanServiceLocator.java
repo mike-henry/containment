@@ -33,6 +33,7 @@ class WebBeanServiceLocator extends ServiceLocatorImpl {
 		try {
 			result = super.getService(contractOrImpl, qualifiers);
 		} catch (MultiException error) {
+			log.error("while fectching {} " ,contractOrImpl.getName());
 			multiException = error;
 		}
 
@@ -53,7 +54,7 @@ class WebBeanServiceLocator extends ServiceLocatorImpl {
 		BeanManagerImpl bm = webBeansContext.getBeanManagerImpl();
 		
 		Set<Bean<?>> beans = bm.getBeans(contractOrImpl, qualifiers);
-		RequestContext rc = new RequestContext();
+		
 
 		CreationalContext<?> creationalContext = bm.createCreationalContext(beans.stream().findFirst().get());
 		T object = (T) bm.getReference(beans.stream().findFirst().get(), contractOrImpl, creationalContext);
