@@ -9,7 +9,7 @@ pipeline {
     }
     stage('publish ') { 
       steps {
-        sh ' ./gradlew  deploy' 
+        sh ' ./gradlew  upload' 
       }
     }
   }
