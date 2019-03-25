@@ -15,19 +15,6 @@ targetCompatibility = 1.8
 
 mainClassName = "com.spx.general.MainApplication"
 
-
-
-
-repositories {
-    maven {
-         
-    }
-}
-
-
-
-
-
 ext {
    
     deltaspikeVersion="1.8.0"
@@ -136,15 +123,3 @@ dependencies {
  }
 
 
-uploadArchives {
-    repositories {
-       mavenDeployer {
-             repository(url: "http://workflow-nexus-svc:8081/nexus/content/repositories/snapshots") {
-             authentication(userName: "spx-developer", password: "publisher")
-}
-             pom.version = "1.0-xxx"
-             pom.artifactId = "simple-project"
-             pom.groupId = "com.spx-example"
-       }
-    }
-}
