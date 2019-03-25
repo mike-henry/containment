@@ -6,6 +6,10 @@ pipeline {
         steps {
           sh 'chmod u+x ./gradlew && ./gradlew  build' 
       }
+      stage('Build Only') { 
+        steps {
+          sh './gradlew  deploy' 
+      }
     }
   }
 }
