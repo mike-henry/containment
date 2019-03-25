@@ -127,7 +127,7 @@ dependencies {
  uploadArchives {
     repositories {
        mavenDeployer {
-             repository(url: "http://workflow-nexus-svc:8081/nexus/content/repositories/spx-repository") {
+             repository(url: "http://workflow-nexus-svc:8081/nexus/content/repository/spx-repository") {
              authentication(userName: "jenkins", password: "publisher")
 }
              pom.version = "1.0-SNAPSHOT"
