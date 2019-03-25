@@ -128,7 +128,7 @@ dependencies {
     repositories {
        mavenDeployer {
              repository(url: "http://workflow-nexus-svc:8081/nexus/content/repositories/snapshots") {
-             authentication(userName: "spx-developer", password: "publisher")
+             authentication(userName: "jenkins", password: "publisher")
 }
              pom.version = "1.0-SNAPSHOT"
              pom.artifactId = "sample-project"
