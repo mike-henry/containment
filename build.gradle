@@ -128,7 +128,7 @@ dependencies {
     repositories {
        mavenDeployer {
         repository(url: "http://workflow-nexus-svc:8081//repository/spx-repository") {
-          authentication(userName: "$System.env.NEXUS_USER", password: "$System.env.$NEXUS_SECRET")
+          authentication(userName: "$System.env.NEXUS_USER", password: "$System.env.NEXUS_SECRET")
         }
         pom.version = version
         pom.artifactId = rootProject.name
