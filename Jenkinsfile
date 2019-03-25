@@ -1,6 +1,10 @@
 pipeline {
     
   agent any
+     environment {
+        NEXUS_USER     = "jenkins"
+        NEXUS_SECRET = credentials('jenkins-nexus-secret')
+    }
   stages {
     stage('Build Only') { 
       steps {
