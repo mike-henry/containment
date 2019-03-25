@@ -2,7 +2,7 @@ pipeline {
     
     agent any
     stages {
-      stage('Build Only') { 
+      stage('Pre-Build Only') { 
         steps {
           sh 'chmod u+x ./gradlew && ./gradlew  build' 
       }
@@ -10,7 +10,7 @@ pipeline {
         steps {
           sh './gradlew  build' 
       }
-      stage('Build Only') { 
+      stage('Publish') { 
         steps {
           sh './gradlew  deploy' 
       }
