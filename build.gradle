@@ -124,4 +124,17 @@ dependencies {
    }
  }
 
+ uploadArchives {
+    repositories {
+       mavenDeployer {
+             repository(url: "http://workflow-nexus-svc:8081/nexus/content/repositories/snapshots") {
+             authentication(userName: "spx-developer", password: "publisher")
+}
+             pom.version = "1.0-SNAPSHOT"
+             pom.artifactId = "sample-project"
+             pom.groupId = "com.spx.example"
+       }
+    }
+}
+
 

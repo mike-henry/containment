@@ -8,6 +8,10 @@ pipeline {
       }
       stage('Build Only') { 
         steps {
+          sh './gradlew  build' 
+      }
+      stage('Build Only') { 
+        steps {
           sh './gradlew  deploy' 
       }
     }
