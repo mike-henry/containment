@@ -30,10 +30,7 @@ public class ContainerServicesTest {
     
     
     private Answer<Container> containerSaveAnswer;
-    
-    
-    
-
+ 
     @Before
     public void init() {
         subject = new ContainerServices();
@@ -45,7 +42,6 @@ public class ContainerServicesTest {
 			public Container answer(InvocationOnMock invocation) throws Throwable {
 				return (Container) invocation.getArguments()[0];
 		}};
-      
         
     }
 
@@ -61,7 +57,7 @@ public class ContainerServicesTest {
     public void checkGetGlobalNotFound() {
         Optional<Container> global = Optional.ofNullable(null);
         when(repository.findByName(Global.NAME)).thenReturn(global);
-        Global result = subject.getGlobal();
+        subject.getGlobal();
         verify(repository,times(2)).save(any(Global.class)); 
     }
     
