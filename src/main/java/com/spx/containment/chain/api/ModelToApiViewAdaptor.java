@@ -28,17 +28,17 @@ public class ModelToApiViewAdaptor {
 		RequestView result = new RequestView();
 		result.setDestination(model.getDestination().getReference());
 		result.setReference(model.getReference());
-		setAllocationViews(model, result);
+		//setAllocationViews(model, result);
 		setRequiredItemViews(model, result);
 		return result;
 	}
 
-	private void setAllocationViews(Request model, RequestView result) {
-//		model.getAllocations()
-//		.stream()
-//		.map(this::toAllocationView)
-//		.forEach(v->result.getAllocations().add(v));
-	}
+//	private void setAllocationViews(Request model, RequestView result) {
+////		model.getAllocations()
+////		.stream()
+////		.map(this::toAllocationView)
+////		.forEach(v->result.getAllocations().add(v));
+//	}
 	
 	private void setRequiredItemViews(Request model, RequestView result) {
 		model.getRequiredItems()
