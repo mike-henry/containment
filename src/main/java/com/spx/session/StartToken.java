@@ -1,7 +1,6 @@
 package com.spx.session;
 
 import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class StartToken

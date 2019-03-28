@@ -2,16 +2,13 @@ package com.spx.containment.persistance;
 
 import java.util.Optional;
 import java.util.UUID;
-
 import javax.inject.Inject;
 import javax.persistence.FlushModeType;
-
 import org.apache.deltaspike.data.api.AbstractEntityRepository;
 import org.apache.deltaspike.data.api.EntityManagerConfig;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.QueryParam;
 import org.apache.deltaspike.data.api.Repository;
-
 import com.spx.containment.model.Container;
 @Repository
 @EntityManagerConfig(entityManagerResolver =  ContainerEntityScanner.class, flushMode = FlushModeType.AUTO)

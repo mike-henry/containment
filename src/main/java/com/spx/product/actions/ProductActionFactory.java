@@ -2,7 +2,6 @@ package com.spx.product.actions;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.spx.product.api.ProductView;
 import com.spx.product.services.ProductManager;
 import com.spx.product.services.ProductModelToViewMapper;

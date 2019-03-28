@@ -1,7 +1,6 @@
 package com.spx.product.services;
 
 import javax.inject.Named;
-
 import com.spx.product.api.ProductView;
 import com.spx.product.model.Product;
 

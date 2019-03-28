@@ -2,9 +2,7 @@ package com.spx.general;
 
 
 import java.util.Properties;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
 
 

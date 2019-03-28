@@ -2,7 +2,6 @@ package com.spx.product.api;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
-
 import javax.annotation.security.PermitAll;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -15,13 +14,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
 import com.spx.containment.actions.ActionExecutor;
 import com.spx.product.actions.CreateProductAction;
 import com.spx.product.actions.GetProductAction;
 import com.spx.product.actions.ProductActionFactory;
 import com.spx.product.actions.RemoveProductAction;
-
 import io.swagger.annotations.Api;
 @Produces({ APPLICATION_JSON, TEXT_PLAIN })
 @Consumes({ APPLICATION_JSON, TEXT_PLAIN })

@@ -1,10 +1,8 @@
 package com.spx.product.model;
 
 import javax.persistence.Entity;
-
 import com.spx.containment.model.Referenceable;
 import com.spx.containment.persistance.ContainmentAccess;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

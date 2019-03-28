@@ -3,7 +3,6 @@ package com.spx.inventory.actions;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
-
 import com.spx.containment.model.Container;
 import com.spx.containment.services.ContainerServices;
 import com.spx.inventory.api.InventoryView;

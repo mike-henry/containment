@@ -1,7 +1,6 @@
 package com.spx.containment.actions;
 
 import java.util.concurrent.Callable;
-
 import com.spx.containment.api.ContainerView;
 import com.spx.containment.services.ModelToViewAdaptor;
 

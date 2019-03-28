@@ -1,37 +1,32 @@
 package com.spx.containment.chain.repository;
 
 import java.util.UUID;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
-
 import org.apache.deltaspike.data.api.AbstractEntityRepository;
 import org.apache.deltaspike.data.api.EntityManagerConfig;
 import org.apache.deltaspike.data.api.Repository;
-
-import com.spx.containment.chain.model.Allocation;
-import com.spx.containment.chain.model.BOMItem;
 import com.spx.containment.chain.model.Request;
 import com.spx.containment.persistance.ContainerEntityScanner;
 import com.spx.containment.persistance.ContainmentAccess;
 import com.spx.containment.persistance.ModelRepository;
-import com.spx.product.model.Product;
+
 @Repository
 
 @EntityManagerConfig(entityManagerResolver = ContainerEntityScanner.class, flushMode = FlushModeType.COMMIT)
-public abstract class RequestRepository extends AbstractEntityRepository<Request, UUID>  {
+public abstract class RequestRepository extends AbstractEntityRepository<Request, UUID> {
 
-    @Inject
-    private ModelRepository saver;
-    
-    @Inject
-    @ContainmentAccess
-    private EntityManager em; 
-    
-    @Override
-    public Request save(Request product) {
-        return saver.save(product);
-    }
- 
+  @Inject
+  private ModelRepository saver;
+
+  @Inject
+  @ContainmentAccess
+  private EntityManager em;
+
+  @Override
+  public Request save(Request product) {
+    return saver.save(product);
+  }
+
 }

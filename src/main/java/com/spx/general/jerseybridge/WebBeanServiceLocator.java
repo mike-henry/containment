@@ -2,17 +2,13 @@ package com.spx.general.jerseybridge;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;
-
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
-
 import org.apache.webbeans.config.WebBeansContext;
 import org.apache.webbeans.container.BeanManagerImpl;
-import org.apache.webbeans.context.RequestContext;
 import org.glassfish.hk2.api.MultiException;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.jvnet.hk2.internal.ServiceLocatorImpl;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

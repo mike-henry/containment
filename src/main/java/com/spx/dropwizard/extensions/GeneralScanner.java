@@ -1,11 +1,6 @@
 package com.spx.dropwizard.extensions;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.apache.webbeans.corespi.se.DefaultScannerService;
-
-import com.spx.general.config.ApplicationConfiguration;
 
 public class GeneralScanner extends DefaultScannerService {
 

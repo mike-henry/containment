@@ -1,7 +1,6 @@
 package com.spx.containment.chain.actions;
 
 import java.util.concurrent.Callable;
-
 import com.spx.containment.chain.api.InventoryRequestService;
 import com.spx.containment.chain.api.ModelToApiViewAdaptor;
 import com.spx.containment.chain.api.RequestView;

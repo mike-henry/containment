@@ -3,15 +3,12 @@ package com.spx.containment.services;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-
 import com.spx.containment.business.exceptions.NotFoundException;
 import com.spx.containment.model.Container;
 import com.spx.containment.model.Global;
 import com.spx.containment.persistance.ContainerRepository;
-
 import lombok.extern.slf4j.Slf4j;
 
 @RequestScoped

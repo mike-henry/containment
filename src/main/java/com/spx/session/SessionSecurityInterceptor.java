@@ -2,7 +2,6 @@ package com.spx.session;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -14,12 +13,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.Provider;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.subject.Subject;
-
 import com.spx.general.config.ApplicationConfiguration;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Provider

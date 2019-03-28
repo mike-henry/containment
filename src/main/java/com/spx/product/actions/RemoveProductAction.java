@@ -1,7 +1,6 @@
 package com.spx.product.actions;
 
 import java.util.concurrent.Callable;
-
 import com.spx.product.services.ProductManager;
 
 public class RemoveProductAction implements Callable<Void> {

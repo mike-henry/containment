@@ -1,7 +1,6 @@
 package com.spx.general.persistance;
 
 import java.lang.annotation.Annotation;
-
 import org.hibernate.boot.archive.scan.internal.StandardScanner;
 import org.hibernate.boot.archive.scan.spi.ScanEnvironment;
 import org.hibernate.boot.archive.scan.spi.ScanOptions;

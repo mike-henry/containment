@@ -1,7 +1,6 @@
 package com.spx.product.actions;
 
 import java.util.concurrent.Callable;
-
 import com.spx.product.api.ProductView;
 import com.spx.product.model.Product;
 import com.spx.product.services.ProductManager;

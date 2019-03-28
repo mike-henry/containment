@@ -1,7 +1,6 @@
 package com.spx.general.jerseybridge;
 
 import javax.inject.Singleton;
-
 import org.apache.webbeans.config.WebBeansContext;
 import org.glassfish.hk2.api.DynamicConfigurationService;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -12,7 +11,6 @@ import org.jvnet.hk2.internal.DynamicConfigurationServiceImpl;
 import org.jvnet.hk2.internal.InstantiationServiceImpl;
 import org.jvnet.hk2.internal.ServiceLocatorRuntimeImpl;
 import org.jvnet.hk2.internal.Utilities;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

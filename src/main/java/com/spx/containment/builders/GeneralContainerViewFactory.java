@@ -2,12 +2,10 @@ package com.spx.containment.builders;
 
 import java.util.Optional;
 import java.util.stream.StreamSupport;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
-
 import com.spx.containment.api.ContainerView;
 import com.spx.containment.model.Container;
 import com.spx.containment.model.Referenceable;

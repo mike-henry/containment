@@ -2,7 +2,6 @@ package com.spx.containment.persistance;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spx.general.PeristanceConfiguration;
-
 import io.dropwizard.db.DataSourceFactory;
 import lombok.Data;
 

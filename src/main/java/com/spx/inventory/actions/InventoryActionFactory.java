@@ -2,7 +2,6 @@ package com.spx.inventory.actions;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.spx.containment.services.ContainerServices;
 import com.spx.inventory.api.InventoryView;
 import com.spx.inventory.services.InventoryLedger;

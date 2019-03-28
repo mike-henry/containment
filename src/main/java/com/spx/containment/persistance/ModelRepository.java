@@ -1,10 +1,8 @@
 package com.spx.containment.persistance;
 
 import java.util.UUID;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-
 import com.spx.containment.model.Referenceable;
 
 public  class ModelRepository  {

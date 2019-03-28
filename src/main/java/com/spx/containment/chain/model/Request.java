@@ -3,15 +3,12 @@ package com.spx.containment.chain.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import com.spx.containment.model.Container;
 import com.spx.containment.model.Referenceable;
 import com.spx.product.model.Product;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

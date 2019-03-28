@@ -3,12 +3,9 @@ package com.spx.session;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-
 import com.spx.session.shiro.ShiroBootstrap;
-
 import lombok.extern.slf4j.Slf4j;
 
 // avoiding web  stuff as much possible 

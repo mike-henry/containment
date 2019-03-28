@@ -2,7 +2,6 @@ package com.spx.containment.actions;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.spx.containment.api.ContainerView;
 import com.spx.containment.services.ContainerServices;
 import com.spx.containment.services.ModelToViewAdaptor;

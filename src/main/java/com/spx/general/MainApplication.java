@@ -3,21 +3,15 @@ package com.spx.general;
 
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.ws.rs.Path;
 import javax.ws.rs.ext.Provider;
-
 import org.apache.webbeans.config.WebBeansContext;
 import org.apache.webbeans.spi.ContainerLifecycle;
-import org.neo4j.cypher.internal.frontend.v2_3.perty.print.printCommandsToString;
-
 import com.spx.dropwizard.extensions.BeanFactory;
 import com.spx.general.config.ApplicationConfiguration;
 import com.spx.general.utils.ClassFinder;
-
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;

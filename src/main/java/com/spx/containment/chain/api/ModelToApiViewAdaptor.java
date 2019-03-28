@@ -1,10 +1,8 @@
 package com.spx.containment.chain.api;
 
 import java.util.UUID;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.spx.containment.chain.model.Allocation;
 import com.spx.containment.chain.model.BOMItem;
 import com.spx.containment.chain.model.Request;

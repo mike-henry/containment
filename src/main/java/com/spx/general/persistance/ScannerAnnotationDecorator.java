@@ -3,7 +3,6 @@ package com.spx.general.persistance;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import org.hibernate.boot.archive.scan.spi.ClassDescriptor;
 import org.hibernate.boot.archive.scan.spi.MappingFileDescriptor;
 import org.hibernate.boot.archive.scan.spi.PackageDescriptor;

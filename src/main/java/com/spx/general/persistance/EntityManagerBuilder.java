@@ -2,18 +2,14 @@ package com.spx.general.persistance;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
 import org.hibernate.jpa.HibernatePersistenceProvider;
-
 import com.spx.general.config.ApplicationConfiguration;
 import com.spx.session.AuthorityAccess;
-
 import io.dropwizard.db.DataSourceFactory;
 
 public class EntityManagerBuilder {

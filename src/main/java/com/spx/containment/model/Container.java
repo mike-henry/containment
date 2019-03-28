@@ -6,15 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import com.spx.containment.persistance.ContainmentAccess;
-
 import lombok.Getter;
 import lombok.Setter;
 

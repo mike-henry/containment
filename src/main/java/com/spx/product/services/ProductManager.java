@@ -2,7 +2,6 @@ package com.spx.product.services;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-
 import com.spx.containment.business.exceptions.NotFoundException;
 import com.spx.product.model.Product;
 import com.spx.product.repository.ProductRepository;

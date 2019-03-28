@@ -1,7 +1,6 @@
 package com.spx.containment.builders;
 
 import java.math.BigDecimal;
-
 import com.spx.containment.api.ContainerView;
 import com.spx.containment.model.Box;
 

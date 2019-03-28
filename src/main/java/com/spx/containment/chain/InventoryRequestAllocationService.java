@@ -1,12 +1,10 @@
 package com.spx.containment.chain;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
-
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import com.spx.containment.chain.model.Allocation;
 import com.spx.containment.chain.model.BOMItem;
 import com.spx.containment.chain.model.Request;
@@ -16,7 +14,6 @@ import com.spx.inventory.model.Inventory;
 import com.spx.inventory.services.InventoryLedger;
 
 
-//@RequestScoped
 @Named
 public class InventoryRequestAllocationService {
  
@@ -35,36 +32,38 @@ public class InventoryRequestAllocationService {
     }
    
    public void allocateTo(final Request request){
-       request.getRequiredItems().stream()
+     request.getRequiredItems().stream()
        .forEach(item ->  allocateInventoryTo(request, item)
-       );
+     );
    }
   
    private void allocateInventoryTo(final Request request,BOMItem item) {
-       SupplyChainLink chain = supplyChainService.getSupplyChainFor(request.getDestination(),item.getProduct()).orElseThrow( () ->new RuntimeException("No supply chain found"));
-       List<Inventory> inventoryOfProduct = ledger.getContainerContentsOfProduct(chain.getFrom(), item.getProduct()) ;
-       int alloctedSoFar = 0;
-       
-       for(Inventory inventory:inventoryOfProduct) {
-           if (alloctedSoFar < item.getQuantity()) {
-               int free = getFreeQuantity(inventory);
-               int allocationQuanity = Math.min(item.getQuantity() - alloctedSoFar, free);
-               if (allocationQuanity == 0 ) continue;
-               createAllocation(request, inventory, allocationQuanity);
-               alloctedSoFar+=allocationQuanity;
-           }
-       }
+     SupplyChainLink chain = supplyChainService.getSupplyChainFor(request.getDestination(),item.getProduct()).orElseThrow( () ->new RuntimeException("No supply chain found"));
+     List<Inventory> inventoryOfProduct = ledger.getContainerContentsOfProduct(chain.getFrom(), item.getProduct()) ;
+     final AtomicReference<Integer> allocated = new AtomicReference<Integer>();
+     allocated.set(0);
+     inventoryOfProduct.stream()
+     .forEach(inventory-> {
+    	 if (allocated.get() < item.getQuantity()) {
+    	   Integer free = getFreeQuantity(inventory);
+    	   Integer allocationQuanity = Math.min(item.getQuantity() - allocated.get(), free);
+    	   if (allocationQuanity != 0 ) {
+    	     createAllocation(request, inventory, allocationQuanity);
+    	     allocated.set(allocated.get()+allocationQuanity);
+    	   }
+    	 } 
+     });
    }
   
    private void createAllocation(final Request request, Inventory inventory, int quanity) {
-       Allocation.Builder builder = new Allocation.Builder();
-	   Allocation allocation = builder
-	   	   .inventory(inventory)
-		   .request(request)
-		   .quantity(quanity)
-		   .build();
-	   allocation=   inventoryAllocationRepository.save(allocation);
-	   request.getAllocations().add(allocation);
+     Allocation.Builder builder = new Allocation.Builder();
+	 Allocation allocation = builder
+	   .inventory(inventory)
+	   .request(request)
+	   .quantity(quanity)
+	   .build();
+	 allocation=   inventoryAllocationRepository.save(allocation);
+	 request.getAllocations().add(allocation);
    }
 
     private int getFreeQuantity(Inventory inventory) {

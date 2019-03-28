@@ -3,12 +3,10 @@ package com.spx.inventory.model;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
 import com.spx.containment.model.Container;
 import com.spx.containment.model.Referenceable;
 import com.spx.containment.persistance.ContainmentAccess;
 import com.spx.product.model.Product;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

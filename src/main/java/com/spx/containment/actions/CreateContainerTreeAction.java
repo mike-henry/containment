@@ -2,7 +2,6 @@ package com.spx.containment.actions;
 
 import java.util.Optional;
 import java.util.concurrent.Callable;
-
 import com.spx.containment.api.ContainerView;
 import com.spx.containment.model.Container;
 import com.spx.containment.services.ContainerServices;

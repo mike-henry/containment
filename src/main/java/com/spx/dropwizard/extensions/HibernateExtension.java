@@ -5,7 +5,6 @@ import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.inject.Inject;
-
 import com.spx.general.config.ApplicationConfiguration;
 
 

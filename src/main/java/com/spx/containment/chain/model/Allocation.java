@@ -1,15 +1,11 @@
 package com.spx.containment.chain.model;
 
 import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
 import com.spx.containment.model.Container;
-import com.spx.containment.model.Referenceable;
 import com.spx.inventory.model.Inventory;
-
 import lombok.Getter;
 
 @Getter

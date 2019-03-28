@@ -3,11 +3,9 @@ package com.spx.inventory.services;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-
 import com.spx.containment.model.Container;
 import com.spx.containment.services.ContainerServices;
 import com.spx.inventory.model.Inventory;

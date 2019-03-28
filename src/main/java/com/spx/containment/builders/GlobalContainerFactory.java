@@ -1,7 +1,6 @@
 package com.spx.containment.builders;
 
 import javax.inject.Inject;
-
 import com.spx.containment.api.ContainerView;
 import com.spx.containment.model.Global;
 import com.spx.containment.services.ContainerServices;

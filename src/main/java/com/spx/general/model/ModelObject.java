@@ -8,7 +8,6 @@ import javax.persistence.MappedSuperclass;
 //import javax.persistence.TemporalType;
 //import javax.persistence.Version;
 import javax.persistence.SequenceGenerator;
-
 import lombok.Data;
 
 @MappedSuperclass

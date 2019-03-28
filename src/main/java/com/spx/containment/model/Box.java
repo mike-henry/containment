@@ -1,9 +1,7 @@
 package com.spx.containment.model;
 
 import java.math.BigDecimal;
-
 import javax.persistence.Entity;
-
 import com.spx.containment.persistance.ContainmentAccess;
 
 @Entity

@@ -1,7 +1,6 @@
 package com.spx.inventory.actions;
 
 import java.util.concurrent.Callable;
-
 import com.spx.inventory.api.InventoryView;
 import com.spx.inventory.model.Inventory;
 import com.spx.inventory.services.InventoryLedger;

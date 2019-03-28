@@ -1,9 +1,5 @@
 package com.spx.general.persistance;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.spi.Context;
-import javax.enterprise.inject.spi.CDI;
-import javax.enterprise.inject.spi.InterceptionFactory;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -11,11 +7,6 @@ import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.transaction.Transactional;
-
-import org.apache.webbeans.container.BeanManagerImpl;
-import org.apache.webbeans.container.InjectableBeanManager;
-import org.apache.webbeans.context.RequestContext;
-
 import com.spx.containment.persistance.ContainmentAccess;
 
 @Transactional

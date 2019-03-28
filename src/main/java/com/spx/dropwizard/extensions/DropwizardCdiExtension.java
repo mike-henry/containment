@@ -1,9 +1,7 @@
 package com.spx.dropwizard.extensions;
 
 import static org.slf4j.LoggerFactory.getLogger;
-
 import java.util.Set;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedType;
@@ -11,9 +9,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
-
 import org.slf4j.Logger;
-
 import com.google.common.collect.Sets;
 import com.spx.general.config.ApplicationConfiguration;
 
