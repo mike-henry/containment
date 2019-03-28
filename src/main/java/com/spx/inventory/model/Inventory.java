@@ -12,30 +12,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @ContainmentAccess
 @NoArgsConstructor
 public class Inventory extends Referenceable {
 
-    @ManyToOne
-    private Container container;
+  @ManyToOne
+  private Container container;
 
-    @Basic
-    private int quantity = 1; // BigDecimal keep it simple though
-    
-    @ManyToOne
-    private Product product;
+  @Basic
+  private int quantity = 1; // BigDecimal keep it simple though
 
-    public Inventory(Container container, int quantity, Product product, String reference) {
-        this.container = container;
-        this.quantity = quantity;
-        this.product = product;
-        this.reference = reference;
-    }
+  @ManyToOne
+  private Product product;
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+  public Inventory(Container container, int quantity, Product product, String reference) {
+    this.container = container;
+    this.quantity = quantity;
+    this.product = product;
+    this.reference = reference;
+  }
+
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
 
 }

@@ -15,11 +15,11 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class Referenceable {
 
-    @Id
-    protected UUID id;
-    @Column(unique = true)
-    protected String name;
-    @Column(unique = true)
-    protected String reference;
+  @Id
+  protected UUID id;
+  @Column(unique = true)
+  protected String name;
+  @Column(unique = true)
+  protected String reference;
 
 }

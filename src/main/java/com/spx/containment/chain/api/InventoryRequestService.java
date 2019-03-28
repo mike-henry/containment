@@ -4,10 +4,9 @@ import com.spx.containment.chain.model.Request;
 
 public class InventoryRequestService {
 
-	void  create(Request inventoryRequest) {
-		
-	}
-	
-	
-	
+  void create(Request inventoryRequest) {
+
+  }
+
+
 }

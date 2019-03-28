@@ -15,21 +15,21 @@ import com.spx.product.model.Product;
 
 @Repository
 @EntityManagerConfig(entityManagerResolver = ContainerEntityScanner.class, flushMode = FlushModeType.COMMIT)
-public abstract class ProductRepository extends AbstractEntityRepository<Product, UUID>  {
+public abstract class ProductRepository extends AbstractEntityRepository<Product, UUID> {
 
-    @Inject
-    private ModelRepository saver;
-    
-    @Override
-    public Product save(Product product) {
-        return saver.save(product);
-    }
+  @Inject
+  private ModelRepository saver;
 
-    @Query("select p from Product p where p.reference=:reference")
-    public abstract Optional<Product> findByReference(@QueryParam("reference")String reference);
-    
-    @Query("select p from Product p where p.name=:name")
-    public abstract Optional<Product> findByName(@QueryParam("name")String name);
+  @Override
+  public Product save(Product product) {
+    return saver.save(product);
+  }
 
-   
+  @Query("select p from Product p where p.reference=:reference")
+  public abstract Optional<Product> findByReference(@QueryParam("reference") String reference);
+
+  @Query("select p from Product p where p.name=:name")
+  public abstract Optional<Product> findByName(@QueryParam("name") String name);
+
+
 }

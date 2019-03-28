@@ -7,19 +7,19 @@ import com.spx.product.services.ProductModelToViewMapper;
 
 public class GetProductAction implements Callable<ProductView> {
 
-    private final String reference;
-    private final ProductModelToViewMapper mapper;
-    private final ProductManager productServices;
+  private final String reference;
+  private final ProductModelToViewMapper mapper;
+  private final ProductManager productServices;
 
-    public GetProductAction(ProductManager productServices, ProductModelToViewMapper mapper, String reference) {
-        this.reference = reference;
-        this.mapper = mapper;
-        this.productServices = productServices;
-    }
+  public GetProductAction(ProductManager productServices, ProductModelToViewMapper mapper, String reference) {
+    this.reference = reference;
+    this.mapper = mapper;
+    this.productServices = productServices;
+  }
 
-    @Override
-    public ProductView call() throws Exception {
-        return mapper.creatViewFromModel(productServices.findByReference(reference));
-    }
+  @Override
+  public ProductView call() throws Exception {
+    return mapper.creatViewFromModel(productServices.findByReference(reference));
+  }
 
 }

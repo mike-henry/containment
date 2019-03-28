@@ -5,19 +5,15 @@ import com.spx.containment.persistance.ContainmentAccess;
 
 @Entity
 @ContainmentAccess
-public class Global extends Container
-{
-	
-	public static final String NAME = "global";
+public class Global extends Container {
 
-	
-//	public Global(){
-//		this.setParent(this);
-//	}
-	
-	
-	
+  public static final String NAME = "global";
 
-	
+
+  // public Global(){
+  // this.setParent(this);
+  // }
+
+
 }
 

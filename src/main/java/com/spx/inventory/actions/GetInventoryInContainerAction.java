@@ -11,23 +11,24 @@ import com.spx.inventory.services.InventoryMapper;
 
 public class GetInventoryInContainerAction implements Callable<List<InventoryView>> {
 
-    private final InventoryMapper mapper;
-    private final InventoryLedger ledger;
-    private final ContainerServices containerServices;
-    private final  String containerReference;
+  private final InventoryMapper mapper;
+  private final InventoryLedger ledger;
+  private final ContainerServices containerServices;
+  private final String containerReference;
 
-    public GetInventoryInContainerAction(InventoryMapper modelToViewMapper, InventoryLedger ledger,ContainerServices containerServices, String containerReference) {
-        this.mapper = modelToViewMapper;
-        this.ledger = ledger;
-        this.containerServices=containerServices;
-        this.containerReference=containerReference;
-    }
+  public GetInventoryInContainerAction(InventoryMapper modelToViewMapper, InventoryLedger ledger,
+      ContainerServices containerServices, String containerReference) {
+    this.mapper = modelToViewMapper;
+    this.ledger = ledger;
+    this.containerServices = containerServices;
+    this.containerReference = containerReference;
+  }
 
-    @Override
-    public List<InventoryView> call() {
-        Container container = containerServices.findByReference(containerReference);
-        return ledger.findInventoryInContainer(container).stream().map(mapper::inventoryModelToView)
-                .collect(Collectors.toList());
-    }
+  @Override
+  public List<InventoryView> call() {
+    Container container = containerServices.findByReference(containerReference);
+    return ledger.findInventoryInContainer(container).stream().map(mapper::inventoryModelToView)
+        .collect(Collectors.toList());
+  }
 
 }

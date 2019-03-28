@@ -29,10 +29,10 @@ public class SupplyChainService {
 
   public Optional<SupplyChainLink> getSupplyChainFor(Container to, Product wanted) {
     return this.supplyChains
-     .stream()
-     .filter(chain -> chain.getProduct().equals(wanted))
-     .filter(chain -> chain.getTo().equals(to))
-     .findFirst();
+        .stream()
+        .filter(chain -> chain.getProduct().equals(wanted))
+        .filter(chain -> chain.getTo().equals(to))
+        .findFirst();
   }
 
 }

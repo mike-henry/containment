@@ -11,33 +11,29 @@ import com.spx.containment.chain.model.BOMItem;
 import com.spx.containment.persistance.ContainerEntityScanner;
 import com.spx.containment.persistance.ContainmentAccess;
 import com.spx.containment.persistance.ModelRepository;
+
 @Repository
 
 @EntityManagerConfig(entityManagerResolver = ContainerEntityScanner.class, flushMode = FlushModeType.COMMIT)
-public abstract class BOMItemRepository extends AbstractEntityRepository<BOMItem, UUID>  {
+public abstract class BOMItemRepository extends AbstractEntityRepository<BOMItem, UUID> {
 
-    @Inject
-    private ModelRepository saver;
-    
-    @Inject
-    @ContainmentAccess
-    private EntityManager em; 
-    
+  @Inject
+  private ModelRepository saver;
 
-  
-    
-    
-   
-  
-	public BOMItem save(BOMItem item) {
-		if (item.getId() != null) {
-			item = em.merge(item);
-		} else if (!em.contains(item)) {
-			em.persist(item);
-		}
-		return item;
+  @Inject
+  @ContainmentAccess
+  private EntityManager em;
 
-	}
+
+  public BOMItem save(BOMItem item) {
+    if (item.getId() != null) {
+      item = em.merge(item);
+    } else if (!em.contains(item)) {
+      em.persist(item);
+    }
+    return item;
+
+  }
 
 
 }

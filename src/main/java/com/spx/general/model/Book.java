@@ -8,12 +8,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name="books")
+@Table(name = "books")
 public class Book extends ModelObject {
 
-    
-    private String author;
-    
-    private String title;
+
+  private String author;
+
+  private String title;
 
 }

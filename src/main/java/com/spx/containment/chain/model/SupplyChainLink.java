@@ -13,8 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SupplyChainLink {
 
-    private Container from;
-    private Container to;
-    private Product product;
-    
+  private Container from;
+  private Container to;
+  private Product product;
+
 }

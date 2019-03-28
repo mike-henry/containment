@@ -5,7 +5,6 @@ import com.spx.containment.persistance.ContainmentAccess;
 
 @Entity
 @ContainmentAccess
-public class Location extends Container
-{
+public class Location extends Container {
 
 }

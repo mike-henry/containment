@@ -17,10 +17,10 @@ public class SupplyChainRepository {
 
   public Optional<SupplyChainLink> getSupplyChainFor(Container to, Product wanted) {
     return supplyChains
-     .stream()
-     .filter(chain -> chain.getProduct().equals(wanted))
-     .filter(chain -> chain.getTo().equals(to))
-     .findFirst();
+        .stream()
+        .filter(chain -> chain.getProduct().equals(wanted))
+        .filter(chain -> chain.getTo().equals(to))
+        .findFirst();
   }
 
 }

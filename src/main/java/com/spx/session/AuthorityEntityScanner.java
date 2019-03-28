@@ -6,19 +6,20 @@ import javax.persistence.EntityManager;
 import org.apache.deltaspike.data.api.EntityManagerResolver;
 import com.spx.general.persistance.FilteredEntityScanner;
 
-public class AuthorityEntityScanner extends FilteredEntityScanner  implements  EntityManagerResolver {
+public class AuthorityEntityScanner extends FilteredEntityScanner implements EntityManagerResolver {
 
-   
-    @Inject @AuthorityAccess
-    private EntityManager  enityMAnager;
-    
-    public Class<? extends Annotation> getEntityGroup() {
-        return AuthorityAccess.class;
-    }
 
-    @Override
-    public EntityManager resolveEntityManager() {
-        return enityMAnager;
-    }
-  
+  @Inject
+  @AuthorityAccess
+  private EntityManager enityMAnager;
+
+  public Class<? extends Annotation> getEntityGroup() {
+    return AuthorityAccess.class;
+  }
+
+  @Override
+  public EntityManager resolveEntityManager() {
+    return enityMAnager;
+  }
+
 }

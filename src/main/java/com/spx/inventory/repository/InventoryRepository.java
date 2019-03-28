@@ -19,53 +19,52 @@ import com.spx.containment.persistance.ContainerEntityScanner;
 import com.spx.containment.persistance.ContainmentAccess;
 import com.spx.containment.persistance.ModelRepository;
 import com.spx.inventory.model.Inventory;
+
 @Repository
 
 @EntityManagerConfig(entityManagerResolver = ContainerEntityScanner.class, flushMode = FlushModeType.COMMIT)
-public abstract class InventoryRepository extends AbstractEntityRepository<Inventory, UUID>  {
+public abstract class InventoryRepository extends AbstractEntityRepository<Inventory, UUID> {
 
-    @Inject
-    private ModelRepository saver;
-    
-    @Inject
-    @ContainmentAccess
-    private EntityManager em; 
-    
+  @Inject
+  private ModelRepository saver;
 
-    @Query("select i from Inventory i where i.name=:name")
-    public abstract Optional<Inventory> findByName(@QueryParam("name") String name);
+  @Inject
+  @ContainmentAccess
+  private EntityManager em;
 
-    @Query("select i from Inventory i where i.id = :id")
-    public abstract Optional<Inventory> findById(@QueryParam("id") String id);
 
-    
-    
-    @SuppressWarnings("unchecked")
-    public  List<Inventory> findByContainers(Collection<Container> containers){
-       String query = "{"+getContainerNativeCriteria(containers) +"}";
-       return em.createNativeQuery(query,Inventory.class)
+  @Query("select i from Inventory i where i.name=:name")
+  public abstract Optional<Inventory> findByName(@QueryParam("name") String name);
+
+  @Query("select i from Inventory i where i.id = :id")
+  public abstract Optional<Inventory> findById(@QueryParam("id") String id);
+
+
+  @SuppressWarnings("unchecked")
+  public List<Inventory> findByContainers(Collection<Container> containers) {
+    String query = "{" + getContainerNativeCriteria(containers) + "}";
+    return em.createNativeQuery(query, Inventory.class)
         .getResultList();
-    }
+  }
 
-    private String getContainerNativeCriteria(Collection<Container> containers) {
-        String containerCriteria= containers.stream()
-        .map(c ->c.getId().toString())
-        .map(id -> "\""+id+"\"")
-        .map( id -> String.format("{container_id:%s}",id))
+  private String getContainerNativeCriteria(Collection<Container> containers) {
+    String containerCriteria = containers.stream()
+        .map(c -> c.getId().toString())
+        .map(id -> "\"" + id + "\"")
+        .map(id -> String.format("{container_id:%s}", id))
         .collect(Collectors.joining(",\n", "$or:  [", "]"));
-        String query = String.format("%s",containerCriteria);
-        return query;
-    }
-    
-    
-   
-    @Override
-    public Inventory save(Inventory inventory) {
-        return saver.save(inventory);
-    }
+    String query = String.format("%s", containerCriteria);
+    return query;
+  }
 
-    public Collection<Inventory> findByContainer(Container container) {
-        return this.findByContainers(Collections.singleton(container));
-    }
+
+  @Override
+  public Inventory save(Inventory inventory) {
+    return saver.save(inventory);
+  }
+
+  public Collection<Inventory> findByContainer(Container container) {
+    return this.findByContainers(Collections.singleton(container));
+  }
 
 }

@@ -12,9 +12,7 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RUNTIME)
-@Target(
-{ TYPE, METHOD, FIELD, PARAMETER, CONSTRUCTOR })
-public @interface ContainmentAccess
-{
+@Target({TYPE, METHOD, FIELD, PARAMETER, CONSTRUCTOR})
+public @interface ContainmentAccess {
 
 }

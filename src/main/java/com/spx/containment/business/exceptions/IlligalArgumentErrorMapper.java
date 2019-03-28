@@ -7,13 +7,12 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 
-
 @Provider
 public class IlligalArgumentErrorMapper implements ExceptionMapper<IllegalArgumentException> {
-    @Override
-    public Response toResponse(IllegalArgumentException ex) {
-        
-        return Response.status(Status.NOT_ACCEPTABLE).entity(ex.getMessage()).type(MediaType.TEXT_PLAIN)
-                .build();
-    }
+  @Override
+  public Response toResponse(IllegalArgumentException ex) {
+
+    return Response.status(Status.NOT_ACCEPTABLE).entity(ex.getMessage()).type(MediaType.TEXT_PLAIN)
+        .build();
+  }
 }

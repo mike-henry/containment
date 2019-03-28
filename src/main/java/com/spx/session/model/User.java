@@ -9,17 +9,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @AuthorityAccess
 @Getter
 @Setter
-public class User
-{
-	@Id
-	private String id = UUID.randomUUID().toString();
+public class User {
+  @Id
+  private String id = UUID.randomUUID().toString();
 
-	private String password;
+  private String password;
 
-	private String name;
+  private String name;
 
 }

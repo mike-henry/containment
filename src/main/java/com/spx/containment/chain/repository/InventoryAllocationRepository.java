@@ -15,33 +15,33 @@ import com.spx.containment.persistance.ContainerEntityScanner;
 import com.spx.containment.persistance.ContainmentAccess;
 import com.spx.containment.persistance.ModelRepository;
 import com.spx.inventory.model.Inventory;
+
 @Repository
 
 @EntityManagerConfig(entityManagerResolver = ContainerEntityScanner.class, flushMode = FlushModeType.COMMIT)
-public abstract class InventoryAllocationRepository extends AbstractEntityRepository<Allocation, UUID>  {
+public abstract class InventoryAllocationRepository extends AbstractEntityRepository<Allocation, UUID> {
 
-    @Inject
-    private ModelRepository saver;
-    
-    @Inject
-    @ContainmentAccess
-    private EntityManager em; 
-    
+  @Inject
+  private ModelRepository saver;
 
-    @Query("select  Allocation a where a.inventory=inventory")
-    public abstract Collection<Allocation>  findByInventory(@QueryParam("inventory")Inventory inventory);
-    
-   
-  
-	public Allocation save(Allocation allocation) {
-		if (allocation.getId() != null) {
-			allocation = em.merge(allocation);
-		} else if (!em.contains(allocation)) {
-			em.persist(allocation);
-		}
-		return allocation;
+  @Inject
+  @ContainmentAccess
+  private EntityManager em;
 
-	}
+
+  @Query("select  Allocation a where a.inventory=inventory")
+  public abstract Collection<Allocation> findByInventory(@QueryParam("inventory") Inventory inventory);
+
+
+  public Allocation save(Allocation allocation) {
+    if (allocation.getId() != null) {
+      allocation = em.merge(allocation);
+    } else if (!em.contains(allocation)) {
+      em.persist(allocation);
+    }
+    return allocation;
+
+  }
 
 
 }

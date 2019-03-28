@@ -3,15 +3,14 @@ package com.spx.containment.builders;
 import com.spx.containment.api.ContainerView;
 import com.spx.containment.model.Container;
 
-public interface SpecficContainerFactory<T extends Container>
-{
+public interface SpecficContainerFactory<T extends Container> {
 
-	String getType();
+  String getType();
 
-	Class<T> getContainerClass();
+  Class<T> getContainerClass();
 
-	T createContainerFormView(ContainerView view);
+  T createContainerFormView(ContainerView view);
 
-	ContainerView createViewContainerContainer(T container);
+  ContainerView createViewContainerContainer(T container);
 
 }

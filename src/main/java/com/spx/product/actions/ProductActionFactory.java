@@ -9,30 +9,29 @@ import com.spx.product.services.ProductModelToViewMapper;
 @Named
 public class ProductActionFactory {
 
-    private final ProductManager productServices;
-    private final ProductModelToViewMapper mapper;
+  private final ProductManager productServices;
+  private final ProductModelToViewMapper mapper;
 
-    @Inject
-    public ProductActionFactory(ProductManager productServices, ProductModelToViewMapper mapper) {
-        super();
-        this.productServices = productServices;
-        this.mapper = mapper;
-    }
+  @Inject
+  public ProductActionFactory(ProductManager productServices, ProductModelToViewMapper mapper) {
+    super();
+    this.productServices = productServices;
+    this.mapper = mapper;
+  }
 
-    public CreateProductAction buildCreateProductAction(ProductView[] containerViews) {
-        CreateProductAction result = new CreateProductAction(productServices, mapper, containerViews);
-        return result;
-    }
+  public CreateProductAction buildCreateProductAction(ProductView[] containerViews) {
+    CreateProductAction result = new CreateProductAction(productServices, mapper, containerViews);
+    return result;
+  }
 
-    public GetProductAction buildGetProductAction(String reference) {
-        return new GetProductAction(productServices,  mapper,reference);
-    }
+  public GetProductAction buildGetProductAction(String reference) {
+    return new GetProductAction(productServices, mapper, reference);
+  }
 
-    public RemoveProductAction buildRemoveProductAction(String reference) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+  public RemoveProductAction buildRemoveProductAction(String reference) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
- 
 
 }

@@ -9,30 +9,30 @@ import com.spx.containment.services.ModelToViewAdaptor;
 @Named
 public class ContainerActionFactory {
 
-    private final ModelToViewAdaptor mapper;
-    private final ContainerServices containerServices;
+  private final ModelToViewAdaptor mapper;
+  private final ContainerServices containerServices;
 
-    @Inject
-    public ContainerActionFactory(ModelToViewAdaptor modelToViewMapper,ContainerServices cam) {
-        this.mapper=modelToViewMapper;  
-        this.containerServices=cam;
-    } 
-    
-    public ContainerActionFactory() {
-    	this(null,null);
-    } 
-    
-    public CreateContainerTreeAction buildCreateContainerTreeAction(ContainerView[] views){
-        return new CreateContainerTreeAction(mapper, containerServices, views);
-    }
+  @Inject
+  public ContainerActionFactory(ModelToViewAdaptor modelToViewMapper, ContainerServices cam) {
+    this.mapper = modelToViewMapper;
+    this.containerServices = cam;
+  }
 
-   
-    public GetContainerTreeAction buildGetContainerTreeAction(String rootName) {
-        return new GetContainerTreeAction(mapper,rootName);
-    }
-    
-    public RemoveContainerAction buildRemoveContainerTreeAction(String containerName) {
-        return new RemoveContainerAction(containerServices, containerName);
-    }
-    
+  public ContainerActionFactory() {
+    this(null, null);
+  }
+
+  public CreateContainerTreeAction buildCreateContainerTreeAction(ContainerView[] views) {
+    return new CreateContainerTreeAction(mapper, containerServices, views);
+  }
+
+
+  public GetContainerTreeAction buildGetContainerTreeAction(String rootName) {
+    return new GetContainerTreeAction(mapper, rootName);
+  }
+
+  public RemoveContainerAction buildRemoveContainerTreeAction(String containerName) {
+    return new RemoveContainerAction(containerServices, containerName);
+  }
+
 }

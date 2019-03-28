@@ -9,33 +9,32 @@ import com.spx.product.repository.ProductRepository;
 @RequestScoped
 public class ProductManager {
 
-    private ProductRepository repository;
+  private ProductRepository repository;
 
-    public ProductManager() {
-    }
+  public ProductManager() {}
 
-    @Inject
-    public ProductManager(ProductRepository repository) {
-        this.repository = repository;
-    }
+  @Inject
+  public ProductManager(ProductRepository repository) {
+    this.repository = repository;
+  }
 
-    public void create(Product product) {
-        this.repository.save(product);
-    }
+  public void create(Product product) {
+    this.repository.save(product);
+  }
 
-    public Product findByReference(String reference) {
-        return this.repository.findByReference(reference)
+  public Product findByReference(String reference) {
+    return this.repository.findByReference(reference)
         .orElseThrow(() -> new NotFoundException("Product Reference not Found"));
-    }
+  }
 
-    public void removeProductByReference(String reference) {
-        Product product = findByReference(reference);
-        this.repository.remove(product);
-    }
+  public void removeProductByReference(String reference) {
+    Product product = findByReference(reference);
+    this.repository.remove(product);
+  }
 
-    public Product findByName(String name) {
-        return this.repository.findByName(name)
+  public Product findByName(String name) {
+    return this.repository.findByName(name)
         .orElseThrow(() -> new NotFoundException("Product Name not Found"));
-    }
+  }
 
 }

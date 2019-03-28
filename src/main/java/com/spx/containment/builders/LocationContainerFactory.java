@@ -3,37 +3,32 @@ package com.spx.containment.builders;
 import com.spx.containment.api.ContainerView;
 import com.spx.containment.model.Location;
 
-public class LocationContainerFactory implements SpecficContainerFactory<Location>
-{
+public class LocationContainerFactory implements SpecficContainerFactory<Location> {
 
-	@Override
-	public String getType()
-	{
+  @Override
+  public String getType() {
 
-		return "Location";
-	}
+    return "Location";
+  }
 
-	@Override
-	public Location createContainerFormView(ContainerView view)
-	{
-		Location result = new Location();
+  @Override
+  public Location createContainerFormView(ContainerView view) {
+    Location result = new Location();
 
-		return result;
-	}
+    return result;
+  }
 
-	@Override
-	public Class<Location> getContainerClass()
-	{
+  @Override
+  public Class<Location> getContainerClass() {
 
-		return Location.class;
-	}
+    return Location.class;
+  }
 
-	@Override
-	public ContainerView createViewContainerContainer(Location container)
-	{
-		ContainerView result = new ContainerView();
+  @Override
+  public ContainerView createViewContainerContainer(Location container) {
+    ContainerView result = new ContainerView();
 
-		return result;
-	}
+    return result;
+  }
 
 }

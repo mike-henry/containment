@@ -13,6 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BOMItemView {
-    private String productReference;
-    private int quantity;
+  private String productReference;
+  private int quantity;
 }

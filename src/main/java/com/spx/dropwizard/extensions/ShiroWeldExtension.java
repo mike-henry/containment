@@ -10,32 +10,22 @@ import com.spx.session.shiro.ShiroBootstrap;
 
 public class ShiroWeldExtension implements Extension {
 
-	
-	final ApplicationConfiguration config;
-	
-    final BeanFactory beanFactory;
 
-   
+  final ApplicationConfiguration config;
 
-    public ShiroWeldExtension(ApplicationConfiguration config,BeanFactory beanFactory){
-        this.config=config;
-        this.beanFactory=beanFactory;
-    }
-    
-    
+  final BeanFactory beanFactory;
 
 
-    void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
-        ShiroBootstrap shiroBootstrap =  new ShiroBootstrap(bm);
-        abd.addBean( beanFactory.createBean(bm,shiroBootstrap) );
-    }
+  public ShiroWeldExtension(ApplicationConfiguration config, BeanFactory beanFactory) {
+    this.config = config;
+    this.beanFactory = beanFactory;
+  }
 
 
-   
-	
+  void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
+    ShiroBootstrap shiroBootstrap = new ShiroBootstrap(bm);
+    abd.addBean(beanFactory.createBean(bm, shiroBootstrap));
+  }
 
 
-    
-
-    
 }

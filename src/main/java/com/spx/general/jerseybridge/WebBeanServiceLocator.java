@@ -13,47 +13,47 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 class WebBeanServiceLocator extends ServiceLocatorImpl {
-	
-	private final WebBeansContext webBeansContext;
 
-	public WebBeanServiceLocator(String name, ServiceLocator parent, WebBeansContext webBeansContext) {
-		super(name, (ServiceLocatorImpl) parent);
-		this.webBeansContext = webBeansContext;
-	}
+  private final WebBeansContext webBeansContext;
 
-	@Override
-	public <T> T getService(Class<T> contractOrImpl, Annotation... qualifiers) throws MultiException {
-		log.info("fetching service {}", contractOrImpl.getName());
-		MultiException multiException = null;
-		T result = null;
-		try {
-			result = super.getService(contractOrImpl, qualifiers);
-		} catch (MultiException error) {
-			log.error("while fectching {} " ,contractOrImpl.getName());
-			multiException = error;
-		}
+  public WebBeanServiceLocator(String name, ServiceLocator parent, WebBeansContext webBeansContext) {
+    super(name, (ServiceLocatorImpl) parent);
+    this.webBeansContext = webBeansContext;
+  }
 
-		if (result == null) {
-			result = getWebBean(contractOrImpl, qualifiers);
-		}
-		if (result == null && multiException != null) {
-			throw multiException;
-		}
+  @Override
+  public <T> T getService(Class<T> contractOrImpl, Annotation... qualifiers) throws MultiException {
+    log.info("fetching service {}", contractOrImpl.getName());
+    MultiException multiException = null;
+    T result = null;
+    try {
+      result = super.getService(contractOrImpl, qualifiers);
+    } catch (MultiException error) {
+      log.error("while fectching {} ", contractOrImpl.getName());
+      multiException = error;
+    }
 
-		return result;
+    if (result == null) {
+      result = getWebBean(contractOrImpl, qualifiers);
+    }
+    if (result == null && multiException != null) {
+      throw multiException;
+    }
 
-	}
+    return result;
 
-	@SuppressWarnings("unchecked")
-	<T> T getWebBean(Class<T> contractOrImpl, Annotation... qualifiers) {
-		log.info("fetching service {} from WebBeans", contractOrImpl.getName());
-		BeanManagerImpl bm = webBeansContext.getBeanManagerImpl();
-		
-		Set<Bean<?>> beans = bm.getBeans(contractOrImpl, qualifiers);
-		
+  }
 
-		CreationalContext<?> creationalContext = bm.createCreationalContext(beans.stream().findFirst().get());
-		T object = (T) bm.getReference(beans.stream().findFirst().get(), contractOrImpl, creationalContext);
-		return object;
-	}
+  @SuppressWarnings("unchecked")
+  <T> T getWebBean(Class<T> contractOrImpl, Annotation... qualifiers) {
+    log.info("fetching service {} from WebBeans", contractOrImpl.getName());
+    BeanManagerImpl bm = webBeansContext.getBeanManagerImpl();
+
+    Set<Bean<?>> beans = bm.getBeans(contractOrImpl, qualifiers);
+
+
+    CreationalContext<?> creationalContext = bm.createCreationalContext(beans.stream().findFirst().get());
+    T object = (T) bm.getReference(beans.stream().findFirst().get(), contractOrImpl, creationalContext);
+    return object;
+  }
 }

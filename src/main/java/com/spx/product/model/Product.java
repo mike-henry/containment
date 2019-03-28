@@ -12,14 +12,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @ContainmentAccess
 @NoArgsConstructor
 public class Product extends Referenceable {
 
-    private String description;
-    
-    private byte image[];
+  private String description;
+
+  private byte image[];
 
 }

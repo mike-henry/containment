@@ -15,10 +15,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RequestView {
 
-	private String reference;
-	private String destination;
+  private String reference;
+  private String destination;
 
-	private final List<AllocationView> allocations = new ArrayList<AllocationView>();
-	private final List<BOMItemView> requiredItems = new ArrayList<BOMItemView>();
+  private final List<AllocationView> allocations = new ArrayList<AllocationView>();
+  private final List<BOMItemView> requiredItems = new ArrayList<BOMItemView>();
 
 }

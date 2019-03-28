@@ -20,10 +20,10 @@ import lombok.Setter;
 @Entity
 public class BOMItem {
 
-	@Id
-	private UUID id;
-	@ManyToOne
-    private Product product;
-    private int quantity;
-    
+  @Id
+  private UUID id;
+  @ManyToOne
+  private Product product;
+  private int quantity;
+
 }

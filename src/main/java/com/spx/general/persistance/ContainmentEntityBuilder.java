@@ -17,34 +17,34 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ContainmentEntityBuilder extends EntityManagerBuilder {
 
-    @Inject
-    @ContainmentAccess
-    public ContainmentEntityBuilder(ApplicationConfiguration configuration) {
-        super(configuration);
-    }
+  @Inject
+  @ContainmentAccess
+  public ContainmentEntityBuilder(ApplicationConfiguration configuration) {
+    super(configuration);
+  }
 
-    @Produces
-    @ContainmentAccess
-    @RequestScoped
-    public EntityManager getContainmentEntityManager() {
-        return getContainmentEntityManagerFactory().createEntityManager();
-    }
+  @Produces
+  @ContainmentAccess
+  @RequestScoped
+  public EntityManager getContainmentEntityManager() {
+    return getContainmentEntityManagerFactory().createEntityManager();
+  }
 
-    @Produces
-    @ContainmentAccess
-    public EntityManagerFactory getContainmentEntityManagerFactory() {
-    	PeristanceConfiguration dbConfig = configuration.getContainment().getDatabase();
-        Properties persistanceUnitProperties = new Properties();
-        persistanceUnitProperties.put(OgmProperties.ENABLED, Boolean.TRUE.toString());
-        persistanceUnitProperties.put(OgmProperties.DATASTORE_PROVIDER,"neo4j_bolt");
-        persistanceUnitProperties.put("hibernate.cache.use_structured_entries", "true");
-        persistanceUnitProperties.put(OgmProperties.HOST,dbConfig.getUrl());
-        persistanceUnitProperties.put(OgmProperties.USERNAME,dbConfig.getUser());
-        persistanceUnitProperties.put(OgmProperties.PASSWORD,dbConfig.getPassword());       
-        persistanceUnitProperties.put(OgmProperties.DATABASE, configuration.getContainment().getDatabaseName());
-        EntityManagerFactory factory = Persistence
-                .createEntityManagerFactory(dbConfig.getPersistanceUnit(), persistanceUnitProperties);
-        return factory;
-    }
+  @Produces
+  @ContainmentAccess
+  public EntityManagerFactory getContainmentEntityManagerFactory() {
+    PeristanceConfiguration dbConfig = configuration.getContainment().getDatabase();
+    Properties persistanceUnitProperties = new Properties();
+    persistanceUnitProperties.put(OgmProperties.ENABLED, Boolean.TRUE.toString());
+    persistanceUnitProperties.put(OgmProperties.DATASTORE_PROVIDER, "neo4j_bolt");
+    persistanceUnitProperties.put("hibernate.cache.use_structured_entries", "true");
+    persistanceUnitProperties.put(OgmProperties.HOST, dbConfig.getUrl());
+    persistanceUnitProperties.put(OgmProperties.USERNAME, dbConfig.getUser());
+    persistanceUnitProperties.put(OgmProperties.PASSWORD, dbConfig.getPassword());
+    persistanceUnitProperties.put(OgmProperties.DATABASE, configuration.getContainment().getDatabaseName());
+    EntityManagerFactory factory = Persistence
+        .createEntityManagerFactory(dbConfig.getPersistanceUnit(), persistanceUnitProperties);
+    return factory;
+  }
 
 }

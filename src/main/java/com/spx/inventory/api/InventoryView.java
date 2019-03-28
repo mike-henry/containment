@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class InventoryView {
-    private String reference;
-    private String containerReference;
-    private int quantity = 1; // BigDecimal keep it simple though
-    private String productReference;
+  private String reference;
+  private String containerReference;
+  private int quantity = 1; // BigDecimal keep it simple though
+  private String productReference;
 }

@@ -10,32 +10,22 @@ import com.spx.general.config.ApplicationConfiguration;
 
 public class HibernateExtension implements Extension {
 
-	
-	private final ApplicationConfiguration config;
-    private final BeanFactory beanFactory;
-	
-   
 
-   
-@Inject
-    public HibernateExtension(ApplicationConfiguration config,BeanFactory beanFactory){
-        this.config=config;
-        this.beanFactory=beanFactory;
-    }
-    
-    
+  private final ApplicationConfiguration config;
+  private final BeanFactory beanFactory;
 
 
-    void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
-    //    JPAHibernateBootstrapper jpaBootStrapper = new JPAHibernateBootstrapper(config);
-//        abd.addBean( beanFactory.createBean(bm,jpaBootStrapper) );
-    }
+  @Inject
+  public HibernateExtension(ApplicationConfiguration config, BeanFactory beanFactory) {
+    this.config = config;
+    this.beanFactory = beanFactory;
+  }
 
 
-  
+  void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
+    // JPAHibernateBootstrapper jpaBootStrapper = new JPAHibernateBootstrapper(config);
+    // abd.addBean( beanFactory.createBean(bm,jpaBootStrapper) );
+  }
 
 
-    
-
-    
 }

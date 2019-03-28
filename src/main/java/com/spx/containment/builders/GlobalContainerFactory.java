@@ -5,42 +5,36 @@ import com.spx.containment.api.ContainerView;
 import com.spx.containment.model.Global;
 import com.spx.containment.services.ContainerServices;
 
-public class GlobalContainerFactory implements SpecficContainerFactory<Global>
-{
+public class GlobalContainerFactory implements SpecficContainerFactory<Global> {
 
-	private Global global;
+  private Global global;
 
-	@Inject
-	GlobalContainerFactory(ContainerServices cam)
-	{
-		global = cam.getGlobal();
-	}
+  @Inject
+  GlobalContainerFactory(ContainerServices cam) {
+    global = cam.getGlobal();
+  }
 
-	@Override
-	public String getType()
-	{
+  @Override
+  public String getType() {
 
-		return "GLOBAL";
-	}
+    return "GLOBAL";
+  }
 
-	@Override
-	public Global createContainerFormView(ContainerView view)
-	{
-		return global;
-	}
+  @Override
+  public Global createContainerFormView(ContainerView view) {
+    return global;
+  }
 
-	@Override
-	public Class<Global> getContainerClass()
-	{
+  @Override
+  public Class<Global> getContainerClass() {
 
-		return Global.class;
-	}
+    return Global.class;
+  }
 
-	@Override
-	public ContainerView createViewContainerContainer(Global container)
-	{
+  @Override
+  public ContainerView createViewContainerContainer(Global container) {
 
-		return new ContainerView();
-	}
+    return new ContainerView();
+  }
 
 }

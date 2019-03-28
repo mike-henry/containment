@@ -7,26 +7,24 @@ import lombok.Data;
 
 @Data
 public class ContainmentConfiguration {
-    
-    @JsonProperty
-    private String  transactionCoordinationStrategy = "jta";
-    
-    @JsonProperty
-    private String  transactionPlatform = "JBossTS";
-    
-    @JsonProperty
-    private String  databaseName = "containment";
 
-    @JsonProperty
-    private DataSourceFactory containmentDataSource = new DataSourceFactory();
-    
-    @JsonProperty
-    private PeristanceConfiguration database = new PeristanceConfiguration(); 
-    
-    @JsonProperty
-    private String persistanceUnit = "containmentPU";
-    
-    
+  @JsonProperty
+  private String transactionCoordinationStrategy = "jta";
 
-    
+  @JsonProperty
+  private String transactionPlatform = "JBossTS";
+
+  @JsonProperty
+  private String databaseName = "containment";
+
+  @JsonProperty
+  private DataSourceFactory containmentDataSource = new DataSourceFactory();
+
+  @JsonProperty
+  private PeristanceConfiguration database = new PeristanceConfiguration();
+
+  @JsonProperty
+  private String persistanceUnit = "containmentPU";
+
+
 }

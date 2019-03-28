@@ -8,13 +8,12 @@ import javax.ws.rs.ext.Provider;
 import com.spx.containment.business.exceptions.NotFoundException;
 
 
-
 @Provider
 public class NotFoundErrorMapper implements ExceptionMapper<NotFoundException> {
-    @Override
-    public Response toResponse(NotFoundException ex) {
-        
-        return Response.status(Status.NOT_FOUND).entity(ex.getMessage()).type(MediaType.TEXT_PLAIN)
-                .build();
-    }
+  @Override
+  public Response toResponse(NotFoundException ex) {
+
+    return Response.status(Status.NOT_FOUND).entity(ex.getMessage()).type(MediaType.TEXT_PLAIN)
+        .build();
+  }
 }

@@ -13,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductView {
-    private String reference;
-    private String name;
-    private String description;
-    private byte image[] = new byte[10];
-    
+  private String reference;
+  private String name;
+  private String description;
+  private byte image[] = new byte[10];
+
 }

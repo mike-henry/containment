@@ -18,47 +18,48 @@ import com.spx.containment.actions.ActionExecutor;
 import com.spx.inventory.actions.InventoryActionFactory;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
-@Produces({ APPLICATION_JSON, TEXT_PLAIN })
-@Consumes({ APPLICATION_JSON, TEXT_PLAIN })
+
+@Produces({APPLICATION_JSON, TEXT_PLAIN})
+@Consumes({APPLICATION_JSON, TEXT_PLAIN})
 @Path(InventoryResource.PATH)
 @Api(InventoryResource.PATH)
 @Dependent
-@Transactional(value=TxType.REQUIRED)
+@Transactional(value = TxType.REQUIRED)
 public class InventoryResource {
 
-    public final static String RESOURCE = "inventory";
-    public final static String NAMED_PARAM = "reference";
-    public final static String RESOURCE_NAME = RESOURCE + "/{" + NAMED_PARAM + "}";
+  public final static String RESOURCE = "inventory";
+  public final static String NAMED_PARAM = "reference";
+  public final static String RESOURCE_NAME = RESOURCE + "/{" + NAMED_PARAM + "}";
 
-    public static final String PATH = "inventoryApi";
+  public static final String PATH = "inventoryApi";
 
-    private final InventoryActionFactory actionFactory;
-    private final ActionExecutor executor;
+  private final InventoryActionFactory actionFactory;
+  private final ActionExecutor executor;
 
-    @Inject
-    public InventoryResource(InventoryActionFactory actionFactory,ActionExecutor executor) {
-        this.actionFactory=actionFactory;
-        this.executor=executor;
-    }
+  @Inject
+  public InventoryResource(InventoryActionFactory actionFactory, ActionExecutor executor) {
+    this.actionFactory = actionFactory;
+    this.executor = executor;
+  }
 
-    @Path(RESOURCE)
-    @POST
-    @Consumes(APPLICATION_JSON)
-    @PermitAll /// temp
-    @Transactional(value=TxType.REQUIRED)
-    @UnitOfWork
-    public void create(InventoryView view) {
-        this.executor.call(actionFactory.buildCreateInventoryAction(view));
-    }
-    
-    @Path(RESOURCE+"/{container-reference}")
-    @GET
-    @Consumes(APPLICATION_JSON)
-    @PermitAll /// temp
-    @Transactional(value=TxType.REQUIRED)
-    @UnitOfWork
-    public List<InventoryView> getInventoryInContainer(@PathParam("container-reference")String containerReference) {
-        return  this.executor.call(actionFactory.buildGetInventoryInContainerAction(containerReference) );
-    }
+  @Path(RESOURCE)
+  @POST
+  @Consumes(APPLICATION_JSON)
+  @PermitAll /// temp
+  @Transactional(value = TxType.REQUIRED)
+  @UnitOfWork
+  public void create(InventoryView view) {
+    this.executor.call(actionFactory.buildCreateInventoryAction(view));
+  }
+
+  @Path(RESOURCE + "/{container-reference}")
+  @GET
+  @Consumes(APPLICATION_JSON)
+  @PermitAll /// temp
+  @Transactional(value = TxType.REQUIRED)
+  @UnitOfWork
+  public List<InventoryView> getInventoryInContainer(@PathParam("container-reference") String containerReference) {
+    return this.executor.call(actionFactory.buildGetInventoryInContainerAction(containerReference));
+  }
 
 }

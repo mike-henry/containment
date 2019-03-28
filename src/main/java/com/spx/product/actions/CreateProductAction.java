@@ -8,23 +8,23 @@ import com.spx.product.services.ProductModelToViewMapper;
 
 public class CreateProductAction implements Callable<Void> {
 
-    private final ProductView[] views;
-    private final ProductModelToViewMapper mapper;
-    private final ProductManager productServices;
+  private final ProductView[] views;
+  private final ProductModelToViewMapper mapper;
+  private final ProductManager productServices;
 
-    public CreateProductAction(ProductManager productServices, ProductModelToViewMapper mapper, ProductView[] views) {
-        this.views = views;
-        this.mapper = mapper;
-        this.productServices = productServices;
-    }
+  public CreateProductAction(ProductManager productServices, ProductModelToViewMapper mapper, ProductView[] views) {
+    this.views = views;
+    this.mapper = mapper;
+    this.productServices = productServices;
+  }
 
-    @Override
-    public Void call() throws Exception {
-        for (ProductView view : views) {
-            Product product = mapper.createModelFromView(view);
-            this.productServices.create(product);
-        }
-        return null;
+  @Override
+  public Void call() throws Exception {
+    for (ProductView view : views) {
+      Product product = mapper.createModelFromView(view);
+      this.productServices.create(product);
     }
+    return null;
+  }
 
 }

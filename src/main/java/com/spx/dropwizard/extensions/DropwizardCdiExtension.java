@@ -16,50 +16,47 @@ import com.spx.general.config.ApplicationConfiguration;
 
 class DropwizardCdiExtension implements Extension {
 
-	
-	
-	
-    private final Logger logger = getLogger(this.getClass());
 
-    private final Set<String> names = Sets.newHashSet();
+  private final Logger logger = getLogger(this.getClass());
 
-    void beforeBeanDiscovery(@Observes BeforeBeanDiscovery bbd) {
-        logger.error("============================> beginning the scanning process");
-    }
+  private final Set<String> names = Sets.newHashSet();
 
-    <T> void processAnnotatedType(@Observes ProcessAnnotatedType<T> pat) {
-    	
-    	
-        final String name = pat.getAnnotatedType().getJavaClass().getName();
-        logger.debug("============================> scanning type: {}", name);
-        names.add(name);
-    }
+  void beforeBeanDiscovery(@Observes BeforeBeanDiscovery bbd) {
+    logger.error("============================> beginning the scanning process");
+  }
 
-    void afterBeanDiscovery(@Observes AfterBeanDiscovery abd) {
-        logger.error("============================> finished the scanning process");
-    }
-    
-    
-    void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
+  <T> void processAnnotatedType(@Observes ProcessAnnotatedType<T> pat) {
 
 
-        //use this to read annotations of the class
+    final String name = pat.getAnnotatedType().getJavaClass().getName();
+    logger.debug("============================> scanning type: {}", name);
+    names.add(name);
+  }
 
-        AnnotatedType<ApplicationConfiguration> at = bm.createAnnotatedType(ApplicationConfiguration.class);
-
-
-        createBean(abd, bm, at);
-
-    }
-
-	private void createBean(AfterBeanDiscovery abd, BeanManager bm, AnnotatedType<ApplicationConfiguration> at) {
-		//use this to instantiate the class and inject dependencies
-
-	}
+  void afterBeanDiscovery(@Observes AfterBeanDiscovery abd) {
+    logger.error("============================> finished the scanning process");
+  }
 
 
+  void afterBeanDiscovery(@Observes AfterBeanDiscovery abd, BeanManager bm) {
 
-    public Set<String> getNames() {
-        return names;
-    }
+
+    // use this to read annotations of the class
+
+    AnnotatedType<ApplicationConfiguration> at = bm.createAnnotatedType(ApplicationConfiguration.class);
+
+
+    createBean(abd, bm, at);
+
+  }
+
+  private void createBean(AfterBeanDiscovery abd, BeanManager bm, AnnotatedType<ApplicationConfiguration> at) {
+    // use this to instantiate the class and inject dependencies
+
+  }
+
+
+  public Set<String> getNames() {
+    return names;
+  }
 }

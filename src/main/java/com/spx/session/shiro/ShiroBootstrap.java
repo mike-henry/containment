@@ -23,82 +23,80 @@ import lombok.extern.slf4j.Slf4j;
 @Default
 public class ShiroBootstrap {
 
-    private static final String REALMS = "realms";
-    private static final String REALM_JNDI_NAME = REALMS+"/ApplRealm";
-   
-    private  BeanManager beanManager;
+  private static final String REALMS = "realms";
+  private static final String REALM_JNDI_NAME = REALMS + "/ApplRealm";
 
-    public ShiroBootstrap(BeanManager beanManager) {
-        this.beanManager = beanManager;
-    }
- 
-    public ShiroBootstrap() {
-    }
+  private BeanManager beanManager;
 
-    @PostConstruct
-    public void setup() {
-        // constructor injection
-        log.info("binding sucurity application realm");
-        ApplRealm appRealm = new ApplRealm(beanManager);
+  public ShiroBootstrap(BeanManager beanManager) {
+    this.beanManager = beanManager;
+  }
 
-        // bind it so shiro can find it!
-        bind(REALM_JNDI_NAME, appRealm);
-        log.info("Shiro bound to context");
-    }
+  public ShiroBootstrap() {}
 
-    @PreDestroy
-    public void destroy() {
-        safeUnbind(REALM_JNDI_NAME); // clean-up!
-        log.info("Shiro unbound fromn context");
-    }
+  @PostConstruct
+  public void setup() {
+    // constructor injection
+    log.info("binding sucurity application realm");
+    ApplRealm appRealm = new ApplRealm(beanManager);
 
-    private void bind(String name, Object object) {
-        try {
-            InitialContext ic = getContext();
-            if(lookup(ic,REALMS,Object.class).isPresent() == false ){
-               ic.createSubcontext(REALMS);
-            }
-            ic.bind(name, object);
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
+    // bind it so shiro can find it!
+    bind(REALM_JNDI_NAME, appRealm);
+    log.info("Shiro bound to context");
+  }
 
-    }
-    
-    
-    @SuppressWarnings("unchecked")
-    <T> Optional<T>  lookup(Context ctx,String name,Class<T> type){
-        Optional<T> result = Optional.ofNullable(null);
-        try {
-            result=Optional.ofNullable((T)ctx.lookup(REALMS));
-        }  catch(NameNotFoundException ne){
-            log.info("Name not found in context:{}",name);
-        }
-        catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-        return result;
+  @PreDestroy
+  public void destroy() {
+    safeUnbind(REALM_JNDI_NAME); // clean-up!
+    log.info("Shiro unbound fromn context");
+  }
+
+  private void bind(String name, Object object) {
+    try {
+      InitialContext ic = getContext();
+      if (lookup(ic, REALMS, Object.class).isPresent() == false) {
+        ic.createSubcontext(REALMS);
+      }
+      ic.bind(name, object);
+    } catch (NamingException e) {
+      throw new RuntimeException(e);
     }
 
-    private InitialContext getContext() throws NamingException {
-        return new InitialContext();
+  }
+
+
+  @SuppressWarnings("unchecked")
+  <T> Optional<T> lookup(Context ctx, String name, Class<T> type) {
+    Optional<T> result = Optional.ofNullable(null);
+    try {
+      result = Optional.ofNullable((T) ctx.lookup(REALMS));
+    } catch (NameNotFoundException ne) {
+      log.info("Name not found in context:{}", name);
+    } catch (NamingException e) {
+      throw new RuntimeException(e);
     }
+    return result;
+  }
 
-    private void safeUnbind(String name) {
-        try {
-            InitialContext ic = getContext();
-            ic.unbind(name);
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
+  private InitialContext getContext() throws NamingException {
+    return new InitialContext();
+  }
 
-        }
+  private void safeUnbind(String name) {
+    try {
+      InitialContext ic = getContext();
+      ic.unbind(name);
+    } catch (NamingException e) {
+      throw new RuntimeException(e);
 
     }
 
-    public void getName() {
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
-        SecurityManager securityManager = factory.getInstance();
-        SecurityUtils.setSecurityManager(securityManager);
-    }
+  }
+
+  public void getName() {
+    Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
+    SecurityManager securityManager = factory.getInstance();
+    SecurityUtils.setSecurityManager(securityManager);
+  }
 
 }
