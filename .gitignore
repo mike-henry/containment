@@ -15,8 +15,5 @@ release.properties
 bin
 /.vscode
 .gradle
-/containment-inventory/build
-/containment-product/build
-/containment-supplychain/build
-build/
+build
 /ObjectStore
