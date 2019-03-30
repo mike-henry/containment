@@ -77,7 +77,6 @@ subprojects  {
   uploadArchives {
     repositories {
        mavenDeployer {
-       // repository(url: "http://workflow-nexus-svc:8081//repository/spx-repository") {
         repository(url: "$System.env.NEXUS_URL" ) {
           authentication(userName: "$System.env.NEXUS_USER", password: "$System.env.NEXUS_SECRET")
         }
