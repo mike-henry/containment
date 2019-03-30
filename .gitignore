@@ -9,7 +9,11 @@ release.properties
 .classpath
 .idea
 *.iml
-.settings/
+.settings
 /ObjectStore/
-/.gradle/
-/build/
+.gradle/
+bin
+/.vscode
+.gradle
+build
+/ObjectStore

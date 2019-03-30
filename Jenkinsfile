@@ -6,15 +6,24 @@ pipeline {
         NEXUS_SECRET = credentials('jenkins-nexus-secret')
         
     }
+
+  
   stages {
+    stage('parameters'){
+      branch = env.BRANCH_NAME;
+    }
+
     stage('Build Only') { 
       steps {
-        sh 'chmod u+x ./gradlew && ./gradlew  build' 
+        sh 'chmod u+x ./gradlew && ./gradlew --no-daemon build' 
       }
     }
     stage('publish ') { 
       steps {
-        sh ' ./gradlew  upload' 
+        if (env.BRANCH_NAME == 'develop') {
+          echo 'I only upload on the develop branch'
+          sh ' ./gradlew --no-daemon upload' 
+        }
       }
     }
   }

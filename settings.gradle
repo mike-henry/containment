@@ -1,0 +1,3 @@
+rootProject.name = 'containment'
+
+include 'containment-core', 'containment-inventory','containment-product','containment-supplychain'
