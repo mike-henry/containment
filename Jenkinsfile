@@ -4,7 +4,7 @@ pipeline {
      environment {
         NEXUS_USER     = "jenkins"
         NEXUS_SECRET = credentials('jenkins-nexus-secret')
-        branch = env.BRANCH_NAME;
+        branch = ${env.BRANCH_NAME} ;
     }
 
   
