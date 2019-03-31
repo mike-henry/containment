@@ -18,7 +18,7 @@ pipeline {
     }
     stage('publish ') { 
       steps {
-         if (env.BRANCH_NAME == 'develop') {
+         if ( branch == 'develop') {
           echo 'I only upload on the develop branch'
           sh ' ./gradlew --no-daemon upload' 
          }
