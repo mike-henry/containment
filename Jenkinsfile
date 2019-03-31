@@ -16,12 +16,13 @@ pipeline {
         sh 'chmod u+x ./gradlew && ./gradlew --no-daemon build' 
       }
     }
-    stage('publish ') { 
+    stage('publish') { 
+      when {
+            branch == 'develop'
+      }
       steps {
-         if ( branch == 'develop') {
           echo 'I only upload on the develop branch'
           sh ' ./gradlew --no-daemon upload' 
-         }
       }
     }
   }
