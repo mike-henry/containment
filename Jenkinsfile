@@ -18,7 +18,7 @@ pipeline {
     }
     stage('publish') { 
       when {
-            branch == 'develop'
+            expression {branch == 'develop'}
       }
       steps {
           echo 'I only upload on the develop branch'
