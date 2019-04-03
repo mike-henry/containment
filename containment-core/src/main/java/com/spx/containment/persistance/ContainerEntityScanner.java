@@ -8,7 +8,6 @@ import com.spx.general.persistance.FilteredEntityScanner;
 
 public class ContainerEntityScanner extends FilteredEntityScanner implements EntityManagerResolver {
 
-
   @Inject
   @ContainmentAccess
   private EntityManager entityManager;
