@@ -1,0 +1,6 @@
+
+dependencies {
+  implementation project(':containment-core')
+  implementation project(':containment-inventory')
+  implementation project(':containment-product')
+}

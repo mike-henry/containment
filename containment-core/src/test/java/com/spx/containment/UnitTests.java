@@ -11,8 +11,7 @@ import com.spx.containment.services.ContainerServicesTest;
         com.spx.containment.actions.ActionTest.class,
         com.spx.containment.actions.ContainmentTest.class,
         com.spx.containment.actions.ContainterResourceTest.class,
-        com.spx.containment.actions.CreateContainerActionTest.class,
-      
+        com.spx.containment.actions.CreateContainerActionTest.class,   
         com.spx.containment.api.ContainerModelToViewMapperTest.class,
         com.spx.containment.services.ContainerAdaptorTests.class,
         ContainerServicesTest.class
