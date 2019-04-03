@@ -24,34 +24,30 @@ import lombok.extern.slf4j.Slf4j;
 
 @ApplicationScoped
 @Slf4j
-public class MainApplication extends Application<ApplicationConfiguration> {
+public class CoreApplication extends Application<ApplicationConfiguration> {
 
   private final ClassFinder classFinder;
 
-
-  private ApplicationConfiguration configuration;
-
-
   static ContainerLifecycle lifecycle;
 
-  public MainApplication(ClassFinder classFinder) {
+  public CoreApplication(ClassFinder classFinder) {
     this.classFinder = classFinder;
   }
+  public CoreApplication() {
+    this.classFinder =  new ClassFinder();;
+  }
 
-  public static void main(String[] args) throws Exception {
+  public static void start(String[] args) throws Exception {
     ClassFinder classFinder = new ClassFinder();
     System.out.println("starting..");
     try {
-      new MainApplication(classFinder).run(args);
+      new CoreApplication(classFinder).run(args);
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  @Override
-  public String getName() {
-    return "Global-Containment";
-  }
+ 
 
   @Override
   public void initialize(Bootstrap<ApplicationConfiguration> bootstrap) {
@@ -85,8 +81,7 @@ public class MainApplication extends Application<ApplicationConfiguration> {
     registerResources(configuration, environment);
 
     BeanFactory beanFactory = new BeanFactory();
-    this.configuration = configuration;
-
+    
     WebBeansContext currentInstance = WebBeansContext.currentInstance();
     currentInstance.getScannerService();
     currentInstance.registerService(ApplicationConfiguration.class, configuration);
@@ -100,10 +95,6 @@ public class MainApplication extends Application<ApplicationConfiguration> {
     ServletContext servletContext = environment.getApplicationContext().getServletContext();
     ServletContextEvent event = new ServletContextEvent(servletContext);
     lifecycle.startApplication(event);
-
-
-    // environment.jersey().register(SessionSecurityInterceptor.class);
-
 
   }
 

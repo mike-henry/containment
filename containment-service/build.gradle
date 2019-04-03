@@ -1,0 +1,26 @@
+
+apply plugin: "java"
+
+apply plugin: "application"
+
+
+
+mainClassName = "com.spx.containment.application.Main"
+
+
+dependencies {
+  implementation project(':containment-core')
+  implementation project(':containment-inventory')
+  implementation project(':containment-product')
+  implementation project(':containment-supplychain')
+}
+
+
+jar {
+   manifest {
+     attributes(
+       'Main-Class': mainClassName,
+       'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' ')
+     )
+   }
+ }
