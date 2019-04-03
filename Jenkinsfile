@@ -13,7 +13,7 @@ pipeline {
 
     stage('Build Only') { 
       steps {
-        sh 'chmod u+x ./gradlew && ./gradlew --no-daemon clean build' 
+        sh 'chmod u+x ./gradlew && ./gradlew --no-daemon  build' 
       }
     }
     stage('publish') { 
