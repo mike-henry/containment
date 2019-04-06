@@ -16,7 +16,7 @@ pipeline {
       }
     }
     stage('Build Image') { 
-      app = docker.build("test/one")
+      //app = docker.build("test/one")
     }
     stage('publish') { 
       when {
