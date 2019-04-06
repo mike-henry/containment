@@ -16,8 +16,8 @@ pipeline {
       }
     }
     stage('Build Image') { 
-      //app = docker.build("test/one")
        steps {
+        app = docker.build("test/one")
         sh 'echo hello' 
       }
     }
