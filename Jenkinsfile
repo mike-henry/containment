@@ -1,5 +1,5 @@
+def app  
 pipeline {
-  def app  
   agent  any
     environment {
       NEXUS_USER     = "jenkins"
@@ -16,7 +16,7 @@ pipeline {
       }
     }
     stage('Build Image') { 
-      app =app = docker.build("test/one")
+      app = docker.build("test/one")
     }
     stage('publish') { 
       when {
