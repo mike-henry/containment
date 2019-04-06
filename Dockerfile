@@ -23,8 +23,8 @@ RUN ./gradlew --no-daemon clean  distZip
 
 FROM alpine:latest as runnable
 COPY --from=build  /usr/local/share/jdk11.0.2 /usr/local/share/jdk11.0.2
-COPY --from=build /containment/build/distributions/*.zip .
-COPY --from=build /containment/src/main/resources/app.yaml /
+COPY --from=build /containment/containment-service/build/distributions/*.zip .
+COPY --from=build /containment/containment-service/src/main/resources/app.yaml /
 RUN unzip *.zip
 RUN rm -rf *.zip
 RUN  mv containment* containment
