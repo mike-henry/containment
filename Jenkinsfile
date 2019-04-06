@@ -18,7 +18,7 @@ pipeline {
     stage('Build Image') { 
        steps {
           script {
-            app = docker.build('containerImage', '--no-cache=true dockerbuild')
+            app = docker.build('containment', '--no-cache=true .')
         }
         //docker.build("test/one")
         sh 'echo hello' 
