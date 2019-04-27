@@ -17,7 +17,7 @@ pipeline {
     }
     stage('Build Image') { 
        steps {
-        sh 'img build -t containment'
+        sh 'img build -t containment .'
         
         sh 'echo hello' 
       }
