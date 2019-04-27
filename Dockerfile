@@ -25,8 +25,8 @@ FROM alpine:latest as runnable
 COPY --from=build  /usr/local/share/jdk11.0.2 /usr/local/share/jdk11.0.2
 #COPY --from=build /containment/containment-service/build/distributions/*.zip .
 WORKDIR  /containment
-COPY ./containment/containment-service/build/distributions/*.zip .
-COPY ./containment/containment-service/src/main/resources/app.yaml /
+COPY ./containment-service/build/distributions/*.zip .
+COPY ./containment-service/src/main/resources/app.yaml /
 #COPY --from=build /containment/containment-service/src/main/resources/app.yaml /
 
 RUN unzip *.zip
