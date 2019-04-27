@@ -19,15 +19,15 @@ ENV GRADLE_HOME /usr/local/share/gradle-5.2.1
 ENV PATH "${JAVA_HOME}/bin:${GRADLE_HOME}/bin:${PATH}"
 
 ADD . /containment
-RUN ./gradlew --no-daemon clean  distZip
+RUN ./gradlew --no-daemon   distZip
 
-#FROM alpine:latest as runnable
-#COPY --from=build  /usr/local/share/jdk11.0.2 /usr/local/share/jdk11.0.2
-#COPY --from=build /containment/containment-service/build/distributions/*.zip .
-#COPY --from=build /containment/containment-service/src/main/resources/app.yaml /
-#RUN unzip *.zip
-#RUN rm -rf *.zip
-#RUN  mv containment* containment
+FROM alpine:latest as runnable
+COPY --from=build  /usr/local/share/jdk11.0.2 /usr/local/share/jdk11.0.2
+COPY --from=build /containment/containment-service/build/distributions/*.zip .
+COPY --from=build /containment/containment-service/src/main/resources/app.yaml /
+RUN unzip *.zip
+RUN rm -rf *.zip
+RUN  mv containment* containment
 WORKDIR  /containment
 ENV JAVA_HOME /usr/local/share/jdk11.0.2
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
