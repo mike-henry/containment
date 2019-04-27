@@ -14,21 +14,24 @@ RUN mv zulu11.29.3-ca-jdk11.0.2-linux_musl_x64 jdk11.0.2 && mv jdk11.0.2  /usr/l
 
 RUN mv gradle-5.2.1 /usr/local/share
 ENV JAVA_HOME /usr/local/share/jdk11.0.2
-ENV GRADLE_HOME /usr/local/share/gradle-5.2.1
+#ENV GRADLE_HOME /usr/local/share/gradle-5.2.1
 
 ENV PATH "${JAVA_HOME}/bin:${GRADLE_HOME}/bin:${PATH}"
 
-ADD . /containment
-RUN ./gradlew --no-daemon   distZip
+#ADD . /containment
+#RUN ./gradlew --no-daemon   distZip
 
 FROM alpine:latest as runnable
 COPY --from=build  /usr/local/share/jdk11.0.2 /usr/local/share/jdk11.0.2
-COPY --from=build /containment/containment-service/build/distributions/*.zip .
-COPY --from=build /containment/containment-service/src/main/resources/app.yaml /
+#COPY --from=build /containment/containment-service/build/distributions/*.zip .
+WORKDIR  /containment
+COPY ./containment/containment-service/build/distributions/*.zip .
+COPY ./containment/containment-service/src/main/resources/app.yaml /
+#COPY --from=build /containment/containment-service/src/main/resources/app.yaml /
+
 RUN unzip *.zip
 RUN rm -rf *.zip
-RUN  mv containment* containment
-WORKDIR  /containment
+#RUN  mv containment* containment
 ENV JAVA_HOME /usr/local/share/jdk11.0.2
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 ENV APP_HOME /containment/lib
