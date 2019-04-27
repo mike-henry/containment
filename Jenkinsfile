@@ -10,19 +10,17 @@ pipeline {
   stages {
    
 
-    stage('Build Only') { 
+    stage('Build Jars') { 
       steps {
-        sh 'chmod u+x ./gradlew && ./gradlew --no-daemon  build' 
+        sh 'chmod u+x ./gradlew && ./gradlew --no-daemon clean build' 
       }
     }
     stage('Build Image') { 
        steps {
         sh 'img build -t containment .'
-        
-        sh 'echo hello' 
       }
     }
-    stage('publish') { 
+    stage('publish jar') { 
       when {
             expression {branch == 'develop'}
       }
